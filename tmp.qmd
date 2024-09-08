@@ -1,9 +1,0 @@
----
-title: "tmp"
-format: html
-jupyter: python3
----
-
-## holas, este es el primer commit, aprendan a usarlo
-
-Caleb Churata :)
