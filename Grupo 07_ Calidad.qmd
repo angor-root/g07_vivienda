@@ -1,0 +1,156 @@
+---
+title: "Evaluación de la Calidad de Habitaciones para Estudiantes en Lima en el Año 2023:Un Análisis Post-Pandemia"
+author: "Grupo 07_ Calidad"
+format: html
+editor: visual
+---
+
+título corto: Grupo 07\_ Calidad
+
+#### Introducción
+
+En un entorno educativo en constante transformación, Lima se ha convertido en una opción esencial para estudiantes universitarios de diversas procedencias, especialmente de provincias. En respuesta a esta realidad, se plantea la necesidad de explorar las opciones de alojamiento que la ciudad dispone, con el fin de cubrir de manera efectiva las demandas específicas de este proyecto.
+
+#### Propósito:
+
+Este proyecto busca investigar y presentar las alternativas habitacionales, centrándose en mini-departamentos y habitaciones, con el propósito de facilitar la experiencia de estudiantes que buscan vivienda en Lima.
+
+#### Justificación:
+
+Mediante el análisis de datos de plataformas confiables como Urbania, Trovit y Mercado Libre, el proyecto pretende crear una herramienta útil para estudiantes que enfrentan el desafío de encontrar alojamiento en una nueva ciudad. Se abordarán aspectos clave como ubicación, precios y características de las habitaciones. Además, se explorarán tendencias en los alquileres estudiantiles en diferentes zonas de Lima Metropolitana, beneficiando tanto a estudiantes como al entendimiento del mercado de alquileres en la ciudad.
+
+#### Objetivos:
+
+-   1.Evaluar la calidad de las habitaciones disponibles para estudiantes universitarios en Lima Metropolitana, con el fin de identificar opciones óptimas para su bienestar y comodidad.
+
+    -   1.1.Analizar las variables relacionadas con la comodidad de las habitaciones (como el estado de mantenimiento y la comodidad de la habitación) en función de la ubicación geográfica para identificar áreas con opciones de alquiler más adecuadas para estudiantes.
+
+    -   1.2. Utilizar gráficos y estadísticas descriptivas para comparar la calidad percibida de las habitaciones amobladas y no amobladas, proporcionando una visión general de las preferencias de los estudiantes en términos de comodidad.
+
+-   2.Investigar en profundidad los diversos factores que impactan en el precio de alquiler de habitaciones destinadas a estudiantes universitarios en Lima, desentrañando los secretos detrás de las tarifas y proporcionando valiosas perspectivas sobre la economía de alquiler en la ciudad.
+
+    -   2.1.Realizar un análisis de regresión que examine cómo las variables como la ubicación, la distancia a la universidad y la presencia de servicios adicionales influyen en el precio mensual del alquiler.
+
+    -   2.2.Presentar visualmente la relación entre las variables cuantitativas, como el precio y el tamaño de la habitación, a través de gráficos de dispersión para identificar patrones y tendencias en los precios de alquiler.
+
+-   3.Realizar un análisis detallado para determinar si las características de las habitaciones en alquiler en Lima se ajustan a las necesidades y preferencias de los estudiantes universitarios, garantizando una experiencia de vida académica y personal satisfactoria.
+
+    -3.1.Evaluar las valoraciones de los estudiantes sobre la descripción de las habitaciones y su relación con la calidad percibida, utilizando estadísticas descriptivas y gráficos para resaltar cualquier discrepancia entre las expectativas y la realidad.
+
+    -   3.2.Investigar si la disponibilidad de transporte público cercano tiene un impacto significativo en la elección de las habitaciones por parte de los estudiantes, mediante análisis de frecuencias y gráficos de barras para mostrar la preferencia en función de esta variable.
+
+#### Datos:
+
+###### Población:
+
+Todos los ambientes en alquiler para estudiantes o universitarios de lima metropolitana en el año 2023
+
+###### Muestra:
+
+180 cuartos en alquiler en Lima metropolitana en el año 2023
+
+###### Unidad de análisis:
+
+Cada cuarto en alquiler en Lima en el año 2023
+
+###### Variables:
+
+-   *Variables cualitativas:*
+
+    -Variables nominales: (5)
+
+    -   Ubicación del ambiente a alquilar
+
+    -   Disponibilidad del servicio higiénico(compartido,privado)
+
+    -   uso de transporte público cercano
+
+    -   presencia de universidad cercana
+
+    -   comodidad de habitación (amoblado, no amoblado, semiamoblado).
+
+    -   Variables ordinales: (4)
+
+        -   Nivel de confiabilidad de los servicios de Internet y electricidad
+        -   Estado de mantenimiento (muy deteriorado,muy bien mantenido:escala del 1 al 5)
+        -   Facilidad de comunicaciones con el propietario o arrendador
+        -   Valoración de la descripción de la habitación(escala del 1 al 5)
+
+-   *Variables cuantitativas:*
+
+    -   Variables discretas: (4)
+
+        -   Cantidad de tiendas o centros de abastecimientos cercanas al lugar de alquiler,
+
+        -   Cantidad de trasportes públicos
+
+        -   Cantidad de servicios adicionales
+
+        -   Cantidad de días que ha estado publicada la oferta
+
+    -   Variables continuas: (4)
+
+        -   Precio del alquiler por mes (soles)
+
+        -   Dimensiones del cuarto-area em2
+
+        -   Tiempo en desplazarse del cuarto a la universidad -minutos
+
+        -   Variable aceptada: Distancia del cuarto a la universidad (km)
+
+#### Análisis de la data:
+
+Mediante la exploración de diversas plataformas en línea, se llevará a cabo un análisis de las características y aspectos fundamentales relacionados con la calidad de las habitaciones, en particular aquellas destinadas al alquiler de estudiantes universitarios. Los hallazgos obtenidos a partir de esta investigación serán utilizados para construir un formulario en el que se recopilarán todos los datos pertinentes. [link del formulario](https://docs.google.com/forms/d/e/1FAIpQLSdoo554rGkw1TsgLX384fVbUbkgU6A9lYPxv_HeGfi5tUPdbA/viewform?usp=sharing)
+
+**páginas:**
+
+[Urbania](https://urbania.pe/buscar/alquiler-de-habitaciones) es una plataforma de bienes raíces en perú que permite a las personas a buscar y ofrecer propiedades para alquilar o comprar aquí puedes encontrar:
+
+listado de habitaciones Filtros y opciones de búsqueda Información detallada de anuncios Datos del contacto Mapa de ubicación Información adicional como: disponibilidad,requisitos de contrato,politicas de pago,medidas,etc
+
+También hay otras páginas como :
+
+[Trovit](https://casas.trovit.com.pe/alquiler-casa-estudiantes-lima) la cual también es una plataforma de bienes raíce
+
+[Mercado libre](https://listado.mercadolibre.com.pe/alquiler-habitaciones-para-estudiantes-lima): una plataforma en línea que permite comprar y vender una amplia variedad de productos y servicios
+
+Además de redes sociales como [facebook](https://www.facebook.com/groups/1195217923866394/) o instagram.
+
+#### Criterio de Investigación
+
+-   Para poder seguir nuestra muestra,se limito geográficamente a "Habitaciones en Lima Metropolitana"
+
+**Preguntas para forms**
+
+1.  ¿Cuál es el enlace del cuál se obtendrá la información?#
+
+-   Variables cualitativas nominales:
+
+    -   ¿Cuál es el distrito donde se ubica la habitación en alquiler?(mencion de solo distrito) T
+    -   ¿Cuál es el nombre de la universidad cercana a la habitación en alquiler?T
+    -   ¿El baño en la habitación es privado, compartido o no aplica?(privado,compartido o no aplica)T
+    -   ¿Existen opciones de transporte público cercanas al espacio en alquiler? (Si/No)T
+    -   ¿Cómo está amoblada la habitación en alquiler (completamente amoblada, básicamente amoblada o no amoblada)?T
+
+-   Variables cualitativas ordinales:
+
+    -   En una escala del 1 al 5, donde 1 representa "Poco confiables" y 5 "Muy confiables," ¿qué tan confiables consideras que son los servicios de internet y electricidad en la habitación o lugar de alquiler?
+    -   ¿En una escala del 1 al 5, donde 1 representa "Muy deteriorado" y 5 "Muy bien mantenido," ¿cómo evaluarías la calidad y el estado de mantenimiento de las habitaciones?
+    -   En una escala del 1 al 5, donde 1 es "Difícil comunicación" y 5 es "Comunicación fluida y eficiente," ¿qué tan fácil es comunicarse con el propietario o arrendador?T
+    -   En una escala del 1 al 5, donde 1 es "Descripción poco informativa" y 5 es "Descripción muy informativa," ¿cómo calificarías la calidad de la descripción que brinda detalles precisos sobre la habitación?T
+
+-   Variables cuantitativas discretas:
+
+    -   ¿Cuántas tiendas o centros de abastecimiento se encuentran en la zona?T
+    -   ¿Hace cuántos días se publicó la oferta de alquiler de la habitación en la página web? T
+    -   Cuántos medios de transporte público están disponibles en un radio de 1 km? ()T
+    -   ¿Cuántos servicios adicionales se mencionan en promedio en cada anuncio de habitación (como limpieza semanal, Wi-Fi, servicios públicos, etc.)?T
+
+-   Variables cuantitativas continuas:
+
+    -   ¿Cuál es el precio mensual de la habitación en alquiler, expresado en soles?T
+    -   ¿Cuál es el tamaño promedio en metros cuadrados del ambiente en alquiler?T
+    -   ¿Cuánto tiempo, en minutos, se estima desde la habitación a la universidad?T
+    -   ¿Cuál es la distancia en kilómetros desde la habitación a la universidad?T
+
+# Limpieza de datos

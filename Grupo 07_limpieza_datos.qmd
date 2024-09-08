@@ -1,0 +1,315 @@
+---
+title: "Proyecto de Estadistica"
+author: "Grupo 07_ Calidad"
+format: html
+editor: visual
+---
+
+# Limpieza de Datos
+
+Importar la base de datos en formato .xlsx (EXCEL)
+
+```{r}
+library(readr)
+BD <- read_csv("D:/BD.csv")
+View(BD)
+```
+
+-   Creamos una copia para su manipulación:
+
+```{r}
+aaa = Proyecto_Calidad_de_habitaciones
+```
+
+-   Resumen rápido de la situación actual de la base de datos
+
+```{r}
+summary(BD)
+```
+
+-   los nombres de variables son muy largas e incomodas, para agilizar usaremos `rename()` y cargamos la librería `dplyr`
+
+```{r}
+library(dplyr) # notamos que es muy tedioso ahcer esto, por lo que recuriremos a colnames()
+```
+
+-   Cambiamos los nombres de las variables usando `colnames()`
+
+```{r}
+View(aaa)
+```
+
+```{r}
+colnames(aaa)[3] = "Enlace" # Enlace de la habitacion
+colnames(aaa)[4] = "Distrito"   
+colnames(aaa)[5] = "Universidad" # universidad cercana analizada para la habitacion
+colnames(aaa)[6] = "Dias_de_publicación"
+colnames(aaa)[7] = "Tiempo_publicacion" # Tiempo en minutos desde la habitacion a la universidad
+colnames(aaa)[8] = "Transporte_bool" # Transporte publico cercano
+colnames(aaa)[9] = "Transporte_int" # cuantos transportes publicos hay cerca
+colnames(aaa)[10] = "Precio" # Precio mensual de la habitacion
+colnames(aaa)[11] = "Tamaño" # Tamaño promedio de la habitacion
+colnames(aaa)[12] = "Servicios" # Servicios adicionales
+colnames(aaa)[13] = "Tiendas" # Tiendas o centros de abastecimiento
+colnames(aaa)[14] = "Distancia" # Distancia en km desde la habitacion a la universidad
+colnames(aaa)[15] = "Amoblado" # Amoblado o no
+colnames(aaa)[16] = "Baño" # Baño privado o compartido
+colnames(aaa)[17] = "confiablidad_servicios" # confiablidad de los servicios de internet y electricidad
+colnames(aaa)[18] = "Calidad_habitacion" # Calidad y estado de mantenimiento de las habitaciones
+colnames(aaa)[19] = "Comunicacion" # Comunicacion con el propietario o arrendador
+colnames(aaa)[20] = "Descripcion" # Calidad de la descripcion que brinda detalles precisos sobre la habitacion
+colnames(aaa)[21] = "Roomate" # Tipo de roomate
+colnames(aaa)[22] = "Fumar" # Se permite fumar
+colnames(aaa)[23] = "Mascotas" # Mascotas permitidas
+colnames(aaa)[24] = "Fiesta" # Fiesta permitida
+colnames(aaa)[25] = "Niños" # Niños permitidos
+
+```
+
+-   Análisis del tipo de variables que tenemos:
+
+```{r}
+str(aaa)
+```
+
+-   Distrito: Análisis de la variable
+
+```{r}
+table(aaa$Distrito)
+unique(aaa$Distrito) # Reconocemos las que estan mal escritas
+```
+
+Corrección de errores de escritura en la variable Distrito
+
+```{r}
+aaa$Distrito = tolower(aaa$Distrito) # Pasamos todo a minuscula
+aaa$Distrito[aaa$Distrito == "santigo de surco"] = "santiago de surco" 
+```
+
+-   Universidad: Análisis de la variable
+
+```{r}
+table(aaa$Universidad)
+unique(aaa$Universidad) # Reconocemos las que estan mal escritas
+aaa$Universidad = tolower(aaa$Universidad) # Pasamos todo a minuscula
+```
+
+Vemos que hay 2 universidades que están mal escritas, por lo que las corregimos
+
+```{r}
+aaa$Universidad[aaa$Universidad == "ulima"] = "ul"
+aaa$Universidad[aaa$Universidad == "upt"] = "utp"
+unique(aaa$Universidad)
+```
+
+-   Tiempo_publicación: Análisis de la variable
+
+```{r}
+table(aaa$Tiempo_publicacion)
+unique(aaa$Tiempo_publicacion) # Reconocemos las que estan mal escritas
+```
+
+-   Transporte_bool: Análisis de la variable
+
+```{r}
+table(aaa$Transporte_bool)
+unique(aaa$Transporte_bool) # Reconocemos las que estan mal escritas
+```
+
+#### 6 Transporte_int: Transporte medios: a números:
+
+```{r}
+unique(aaa$Transporte_int) # Reconocemos las que estan mal escritas
+aaa$Transporte_int[aaa$Transporte_int == "Mas de 4"] = "5"
+# a numero:
+aaa$Transporte_int = as.numeric(aaa$Transporte_int)
+str(aaa$Transporte_int)
+```
+
+#### 9 Cuantos servicios transporte:
+
+```{r}
+unique(aaa$Servicios) # Reconocemos las que estan mal escritas
+aaa$Servicios[aaa$Servicios == "De 3 a mas"] = "4"
+aaa$Servicios = as.numeric(aaa$Servicios)
+str(aaa$Servicios)
+```
+
+#### 10 Tiendas: Tiendas cercanas: a números:
+
+```{r}
+unique(aaa$Tiendas) # Reconocemos las que estan mal escritas
+aaa$Tiendas[aaa$Tiendas == "5 a más"] = "5"
+aaa$Tiendas = as.numeric(aaa$Tiendas)
+str(aaa$Tiendas)
+```
+
+#### Volvemos a Cargar
+
+```{r}
+library(readxl)
+Proyecto_Calidad_de_habitaciones_1 <- read_excel("C:/Users/calei/Downloads/Proyecto_ Calidad de habitaciones_1.xlsx")
+aaa = Proyecto_Calidad_de_habitaciones_1
+```
+
+```{r}
+unique(aaa$Distrito)
+# "Surco" y "surco" cambiar a: "Santigo de Surco" y "Santiago de surco" a "Santiago de Surco"
+aaa$Distrito[aaa$Distrito == "surco"] = "Santigo de Surco"
+aaa$Distrito[aaa$Distrito == "Surco"] = "Santigo de Surco"
+aaa$Distrito[aaa$Distrito == "Santiago de surco"] = "Santiago de Surco"
+aaa$Distrito[aaa$Distrito == "Santigo de Surco"] = "Santiago de Surco"
+
+# Chorrrillos a Chorrillos
+aaa$Distrito[aaa$Distrito == "Chorrrillos"] = "Chorrillos"
+aaa$Distrito[aaa$Distrito == "chorrillos"] = "Chorrillos"
+
+# lima a Lima
+aaa$Distrito[aaa$Distrito == "lima"] = "Lima Metropolitana"
+
+# San borja a San Borja
+aaa$Distrito[aaa$Distrito == "San borja"] = "San Borja"
+aaa$Distrito[aaa$Distrito == "san borja"] = "San Borja"
+
+# Ssan Juan de miraflores:
+aaa$Distrito[aaa$Distrito == "san juan de miraflores"] = "San Juan de Miraflores"
+
+# san juan de lurigancho:
+aaa$Distrito[aaa$Distrito == "San Juan de Lurigancho"] = "San Juan de Lurigancho"
+aaa$Distrito[aaa$Distrito == "san juan de lurigancho"] = "San Juan de Lurigancho"
+unique(aaa$Distrito)
+
+# callao
+aaa$Distrito[aaa$Distrito == "callao"] = "Callao"
+
+# los olivos:
+aaa$Distrito[aaa$Distrito == "los olivos"] = "Los Olivos"
+
+#comas:
+aaa$Distrito[aaa$Distrito == "comas"] = "Comas"
+```
+
+#### Universidades:
+
+```{r}
+unique(aaa$Universidad)
+# "ulima" y "UL" a "ULIMA"
+aaa$Universidad[aaa$Universidad == "ulima"] = "ULIMA"
+aaa$Universidad[aaa$Universidad == "UL"] = "ULIMA"
+
+# "pucp" a "PUCP"
+aaa$Universidad[aaa$Universidad == "pucp"] = "PUCP"
+
+# "UA" a "Autónoma"
+aaa$Universidad[aaa$Universidad == "UA"] = "Autónoma"
+
+# utp:
+aaa$Universidad[aaa$Universidad == "utp"] = "UTP"
+
+# upn
+aaa$Universidad[aaa$Universidad == "upn"] = "UPN"
+```
+
+-   corregimos los separadores decimales para pasarlos a números
+
+```{r}
+str(aaa$Distancia)
+aaa$Distancia = as.numeric(aaa$Distancia)
+str(aaa)
+```
+
+#### Corregimos la variable enlace haciendo una copia de la variable pero parea determinar de que sitio fue extraída la información, para lo cual el filtrado de datos es el siguiente: si después de "https://" hay una palabra diferente a "www" entonces extrae solamente esa palabra antes del siguiente punto "." y si es "https://www" entonces extrae la palabra posterior a este hasta antes del punto de la misma forma:
+
+```{r}
+# borra todo lo que esta antes de https://
+aaa$Sitio_web = gsub(".*https://", "", aaa$Enlace)
+# borra todo lo que esta antes de www.
+aaa$Sitio_web = gsub(".*www.", "", aaa$Sitio_web)
+# borra todo lo que esats despues del primer "/" que aparece
+aaa$Sitio_web = gsub("/.*", "", aaa$Sitio_web)
+```
+
+#### Exportamos los datos de las variables: distrito, universidad, precio, tamaño, servicios, tiendas, distancia, amoblado, baño, confiabilidad_servicios, calidad_habitación, comunicación, descripción, roomate, fumar, mascotas, fiesta, niños, sitio_web, integrante, enlace, a una nueva base de datos llamada "Base_de_datos" que el nombre de las variables sea el mismo y no aaa.nombre_de_la_variable
+
+```{r}
+Base_de_datos = data.frame(aaa$Distrito, aaa$Universidad, aaa$Precio, aaa$Tamaño, aaa$Servicios, aaa$Tiendas, aaa$Distancia, aaa$Amoblado, aaa$Baño, aaa$confiablidad_servicios, aaa$Calidad_habitacion, aaa$Comunicacion, aaa$Descripcion, aaa$Roomate, aaa$Fumar, aaa$Mascotas, aaa$Fiesta, aaa$Niños, aaa$Sitio_web, aaa$Integrante, aaa$Enlace)
+# Cambiamos los nombres de las varaibles
+colnames(Base_de_datos)[1] = "Distrito"
+colnames(Base_de_datos)[2] = "Universidad"
+colnames(Base_de_datos)[3] = "Precio"
+colnames(Base_de_datos)[4] = "Tamaño"
+colnames(Base_de_datos)[5] = "Servicios"
+colnames(Base_de_datos)[6] = "Tiendas"
+colnames(Base_de_datos)[7] = "Distancia"
+colnames(Base_de_datos)[8] = "Amoblado"
+colnames(Base_de_datos)[9] = "Baño"
+colnames(Base_de_datos)[10] = "confiablidad_servicios"
+colnames(Base_de_datos)[11] = "Calidad_habitacion"
+colnames(Base_de_datos)[12] = "Comunicacion"
+colnames(Base_de_datos)[13] = "Descripcion"
+colnames(Base_de_datos)[14] = "Roomate"
+colnames(Base_de_datos)[15] = "Fumar"
+colnames(Base_de_datos)[16] = "Mascotas"
+colnames(Base_de_datos)[17] = "Fiesta"
+colnames(Base_de_datos)[18] = "Niños"
+colnames(Base_de_datos)[19] = "Sitio_web"
+colnames(Base_de_datos)[20] = "Integrante"
+colnames(Base_de_datos)[21] = "Enlace"
+View(Base_de_datos)
+BD_limpia = Base_de_datos
+```
+
+```{r}
+# esportamos la base de datos nueva a un archovo .xlsx
+write.csv(BD_limpia, "C:/Users/CesiaCh/Downloads/BD_limpia.csv")
+```
+
+##### Datos vacios
+
+```{r}
+sum(is.na(BD_limpia)) 
+```
+
+```{r}
+sum(is.na(BD_limpia)) 
+```
+
+#### Corregimos los datos de Distancia
+
+```{r}
+str(BD_limpia$Distancia)
+```
+
+```{r}
+BD_limpia$Distancia = as.numeric(BD_limpia$Distancia)
+```
+
+.
+
+```{r}
+str(aaa_backup)
+```
+
+#### Mejoras 
+
+- convertimos las variables a factor:
+
+
+```{r}
+BD$Integrante = as.factor(BD$Integrante)
+    BD$Distrito = as.factor(BD$Distrito)
+    BD$Universidad = as.factor(BD$Universidad)
+    BD$Transporte_bool = as.factor(BD$Transporte_bool)
+    BD$Amoblado = as.factor(BD$Amoblado)
+    BD$Baño = as.factor(BD$Baño)
+    BD$Roomate = as.factor(BD$Roomate)
+    BD$Fumar = as.factor(BD$Fumar)
+    BD$Mascotas = as.factor(BD$Mascotas)
+    BD$Fiesta = as.factor(BD$Fiesta)
+    BD$Niños = as.factor(BD$Niños)
+    BD$Sitio_web = as.factor(BD$Sitio_web)
+
+```
+
+
+

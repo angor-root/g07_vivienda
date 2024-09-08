@@ -1,0 +1,732 @@
+---
+title: "Proyecto de Estadistica"
+author: "Grupo 07_Calidad"
+format: html
+editor: visual
+---
+
+## Instalamos las librerías necesarias:
+
+```{r}
+library(ggplot2)
+library(stringr)
+library(readxl)
+library(knitr)
+library(dplyr)
+```
+
+## Importamos la data
+
+```{r}
+
+library(readr)
+BD <- read_csv("D:/BD.csv", locale = locale(encoding = "UTF-8", decimal_mark = "."))
+
+```
+
+## Nota: Mejora de la anterior entrega: factor
+
+```{r}
+BD$Integrante = as.factor(BD$Integrante)
+    BD$Distrito = as.factor(BD$Distrito)
+    BD$Universidad = as.factor(BD$Universidad)
+    BD$Transporte_bool = as.factor(BD$Transporte_bool)
+    BD$Amoblado = as.factor(BD$Amoblado)
+    BD$Baño = as.factor(BD$Baño)
+    BD$Roomate = as.factor(BD$Roomate)
+    BD$Fumar = as.factor(BD$Fumar)
+    BD$Mascotas = as.factor(BD$Mascotas)
+    BD$Fiesta = as.factor(BD$Fiesta)
+    BD$Niños = as.factor(BD$Niños)
+    BD$Sitio_web = as.factor(BD$Sitio_web)
+
+```
+
+## Análisis general de la Data
+
+```{r}
+str(BD)
+```
+
+```{r}
+summary(BD)
+```
+
+```{r}
+# ECHAMOS UN VISTAZO A LA PRIMERA FILA DE LA BASE DE DATOS BD
+head(BD)
+```
+
+## Realizamos un Análisis de variables
+
+### Variables cualitativas:
+
+-   Nominal:
+
+    **DISTRITO**
+
+La tabla resultante: Esta tendrá dos columnas: una con las frecuencias(N° de veces que aparece ese distrito) y otra con las proporciones en porcentaje para cada distrito. Esto nos permitirá ver cuántas habitaciones hay en cada distrito y qué porcentaje representan del total
+
+```{r}
+fi=table(BD$Distrito)
+pi=round(prop.table(fi)*100,2)
+cbind(fi,pi)
+```
+
+**COMODIDAD DE LA HABITACION**
+
+```{r}
+tabla_frecuencia <- table(BD$Amoblado)
+frecuencia_absoluta <- as.data.frame(table(BD$Amoblado))
+frecuencia_absoluta$Porcentaje <- (frecuencia_absoluta$Freq / sum(frecuencia_absoluta$Freq)) * 100
+
+print(tabla_frecuencia)
+```
+
+```{r}
+# Moda
+moda_amoblado <- as.character(frecuencia_absoluta$Var1[which.max(frecuencia_absoluta$Freq)])
+moda_amoblado
+```
+
+```{r}
+datos_amoblado <- data.frame(
+  Estado = c("Basicamente amoblada", "Completamente amoblada", "No amoblada"),
+  Frecuencia = c(51, 48, 5)
+)
+
+# Calcular el porcentaje de frecuencia relativa
+datos_amoblado <- datos_amoblado %>%
+  mutate(Porcentaje = (Frecuencia / sum(Frecuencia)) * 100)
+
+# Moda
+moda_amoblado <- "No amoblada"
+
+# Visualizar los resultados
+cat("Resumen de Frecuencias:\n")
+print(datos_amoblado)
+cat("\nModa:", moda_amoblado)
+```
+
+```{r}
+str(BD$Amoblado)
+
+
+
+```
+
+Interpretación:
+
+-   **Basicamente amoblada:**
+
+    -   Hay 51 observaciones que caen en esta categoría.
+
+    -   Esto representa aproximadamente el 49.04% del total de observaciones en la variable "Comodidad por la Habitación".
+
+    -   Esta categoría es la que tiene la frecuencia más alta entre las tres.
+
+-   **Completamente amoblada:**
+
+    -   Hay 48 observaciones que caen en esta categoría.
+
+    -   Esto representa aproximadamente el 46.15% del total de observaciones en la variable "Comodidad por la Habitación".
+
+-   **No amoblada:**
+
+    -   Hay 5 observaciones que caen en esta categoría.
+
+    -   Esto representa aproximadamente el 4.81% del total de observaciones en la variable "Comodidad por la Habitación".
+
+<!-- -->
+
+-   Ordinal:
+
+**CALIDAD DE LA HABITACION**
+
+```{r}
+# Cargar las bibliotecas necesarias
+library(dplyr)
+
+# Crear una tabla de frecuencia para la variable "Calidad_habitacion"
+tabla_frecuencia_calidad <- table(BD$Calidad_habitacion)
+
+# Crear un DataFrame con las frecuencias absolutas y porcentaje de frecuencia relativa
+frecuencia_absoluta_calidad <- as.data.frame(table(BD$Calidad_habitacion))
+frecuencia_absoluta_calidad <- frecuencia_absoluta_calidad %>%
+  mutate(Porcentaje = (Freq / sum(Freq)) * 100)
+
+# Calcular la moda
+moda_calidad_habitacion <- as.character(frecuencia_absoluta_calidad$Var1[which.max(frecuencia_absoluta_calidad$Freq)])
+
+# Presentar los resultados de la tabla de frecuencia y moda
+cat("Resumen de Frecuencias (Calidad_habitacion):\n")
+print(frecuencia_absoluta_calidad)
+
+cat("\nModa (Calidad_habitacion):", moda_calidad_habitacion)
+
+```
+
+Categoría 2: Hay 12 observaciones que pertenecen a la categoría 2. Estas observaciones representan aproximadamente el 7.59% del total de datos en el conjunto.
+
+Categoría 3: Se encuentran 24 observaciones en la categoría 3, lo que equivale a aproximadamente el 15.19% del total de datos.
+
+Categoría 4: La categoría 4 es la más común, con 49 observaciones que la representan. Esto constituye aproximadamente el 31.01% del conjunto de datos.
+
+Categoría 5: La categoría 5 es la que tiene la mayor cantidad de observaciones, con un total de 73. Esto representa aproximadamente el 46.20% del total de datos.
+
+```{r}
+# Gráfico de barras mejorado para 'Calidad_habitacion' con ggplot2
+ggplot(DATA, aes(x=Calidad_habitacion)) +
+  geom_bar(aes(fill=Calidad_habitacion), color="black") +
+  labs(title="Grafico N°1: Calidad de la habitación", x="Calidad", y="Frecuencia(unidades)") +
+  theme_minimal() +
+  scale_fill_discrete(name="Calidad")
+
+
+```
+
+Este gráfico muestra la frecuencia de las diferentes calidades percibidas de las habitaciones. Al igual que el gráfico anterior, cada barra representa una categoría de calidad, y la altura de la barra indica la frecuencia de esa categoría en los datos. Los colores diferentes para cada barra ayudan a distinguir entre las diferentes categorías. Este gráfico es útil para entender la distribución de las calidades percibidas y para identificar las calidades más y menos comunes.
+
+**VALORACION DE LA DESCRIPCION**
+
+```{r}
+# Crear una tabla de frecuencia para la variable "Descripcion"
+tabla_frecuencia_descripcion <- table(BD$Descripcion)
+
+# Crear un DataFrame con las frecuencias absolutas
+frecuencia_absoluta_descripcion <- as.data.frame(tabla_frecuencia_descripcion)
+
+# Calcular el porcentaje de frecuencia relativa
+frecuencia_absoluta_descripcion$Porcentaje <- (frecuencia_absoluta_descripcion$Freq / sum(frecuencia_absoluta_descripcion$Freq)) * 100
+
+# Imprimir la tabla de frecuencia
+cat("Tabla de Frecuencia para Descripcion:\n")
+print(frecuencia_absoluta_descripcion)
+
+# Calcular la moda
+moda_descripcion <- as.character(frecuencia_absoluta_descripcion$Var1[which.max(frecuencia_absoluta_descripcion$Freq)])
+
+# Imprimir la moda
+cat("\nModa para Descripcion:", moda_descripcion)
+```
+
+-   Columna 1 (Categoría o Clase):
+
+1: Hay 1 observación en esta categoría. 2: Hay 12 observaciones en esta categoría. 3: Hay 44 observaciones en esta categoría. 4: Hay 57 observaciones en esta categoría. 5: Hay 43 observaciones en esta categoría.
+
+-   Columna 2 (Frecuencia Absoluta): Representa el número total de observaciones que pertenecen a cada categoría. Por ejemplo, hay 12 observaciones en la categoría 2.
+
+-   Columna 3 (Frecuencia Relativa o Porcentaje):
+
+Representa la proporción de observaciones en cada categoría en relación con el total de observaciones. Se calcula como (Frecuencia Absoluta / Total de Observaciones) \* 100%. Por ejemplo, en la categoría 2, las observaciones representan aproximadamente el 7.59% del total de observaciones.
+
+```{r}
+# Gráfico de barras mejorado para 'Descripcion' con ggplot2
+ggplot(DATA, aes(x=Descripcion)) +
+  geom_bar(aes(fill=Descripcion), color="black") +
+  labs(title="Grafico N°2: Valoraciones de los estudiantes", x="Descripción", y="Frecuencia(unidades)") +
+  theme_minimal() +
+  scale_fill_discrete(name="Descripción")
+```
+
+Este gráfico muestra la frecuencia de las diferentes valoraciones de los estudiantes sobre la descripción de las habitaciones. Cada barra representa una categoría de descripción, y la altura de la barra indica la frecuencia de esa categoría en los datos. Los colores diferentes para cada barra ayudan a distinguir entre las diferentes categorías. Este gráfico es útil para entender la distribución de las valoraciones de los estudiantes y para identificar las categorías más y menos comunes.
+
+### Variables Cuantitativas:
+
+-   Discreta: **NUMERO DE TRANSPORTES**
+
+```{r}
+# Media
+media_transporte <- mean(BD$Transporte_int)
+
+# Mediana
+mediana_transporte <- median(BD$Transporte_int)
+
+# Moda
+moda_transporte <- as.numeric(names(sort(table(BD$Transporte_int), decreasing = TRUE)[1]))
+
+# Rango
+rango_transporte <- range(BD$Transporte_int)
+
+# Desviación estándar
+desviacion_transporte <- sd(BD$Transporte_int)
+
+# Varianza
+varianza_transporte <- var(BD$Transporte_int)
+
+print("media_transporte")
+media_transporte
+
+print("mediana_transporte")
+mediana_transporte
+
+print("moda_transporte")
+moda_transporte
+
+print("rango_transporte")
+rango_transporte
+
+print("desviacion_transporte")
+desviacion_transporte
+
+print("varianza_transporte")
+varianza_transporte
+
+```
+
+```{r}
+summary(BD$Transporte_int)
+```
+
+-Valor Mínimo (Min.): El valor mínimo de 1 indica que algunas habitaciones tienen solo 1 transporte público cercano.
+
+-   Primer Cuartil (1st Qu.): El primer cuartil de 3 sugiere que el 25% de las habitaciones tienen al menos 3 transportes públicos cercanos.
+
+-   Mediana (Median): La mediana de 3 significa que el valor medio de la cantidad de transportes públicos cercanos es de 3.
+
+-   Media (Mean): La media de 3.519 indica que, en promedio, hay aproximadamente 3.52 transportes públicos cercanos a estas habitaciones.
+
+-   Tercer Cuartil (3rd Qu.): El tercer cuartil de 5 sugiere que el 75% de las habitaciones tienen al menos 5 transportes públicos cercanos.
+
+-   Valor Máximo (Max.): El valor máximo de 5 indica que algunas habitaciones tienen hasta 5 transportes públicos cercanos, lo que también coincide con el tercer cuartil
+
+-   Continua: **PRECIO**
+
+MEDIA
+
+```{r}
+media_de_alquiler_por_distrito <- function(BD) {
+  media_por_distrito <- tapply(BD$Precio, BD$Distrito, mean)
+  return(media_por_distrito)
+}
+resultados_media <- media_de_alquiler_por_distrito(BD)
+cat("Media de precios de alquiler por distrito:\n")
+print(resultados_media)
+
+```
+
+MEDIANA
+
+```{r}
+mediana_de_alquiler_por_distrito <- function(BD) {
+  mediana_por_distrito <- tapply(BD$Precio, BD$Distrito, median)
+  return(mediana_por_distrito)
+}
+resultados_mediana <- mediana_de_alquiler_por_distrito(BD)
+cat("Mediana de precios de alquiler por distrito:\n")
+print(resultados_mediana)
+```
+
+MODA
+
+```{r}
+moda_de_alquiler_por_distrito <- function(BD) {
+  moda_por_distrito <- tapply(BD$Precio, BD$Distrito, function(x) {
+    tabla_frecuencia <- table(x)
+    moda <- as.numeric(names(tabla_frecuencia[tabla_frecuencia == max(tabla_frecuencia)]))
+    return(moda)
+  })
+  return(moda_por_distrito)
+}
+
+resultados_moda <- moda_de_alquiler_por_distrito(BD)
+cat("Moda de precios de alquiler por distrito:\n")
+print(resultados_moda)
+
+```
+
+RANGO INTERCUARTILICO
+
+```{r}
+iqr_de_alquiler_por_distrito <- function(BD) {
+  iqr_por_distrito <- tapply(BD$Precio, BD$Distrito, function(x) {
+    Q1 <- quantile(x, 0.25)
+    Q3 <- quantile(x, 0.75)
+    IQR <- Q3 - Q1
+    return(IQR)
+  })
+  return(iqr_por_distrito)
+}
+resultados_iqr <- iqr_de_alquiler_por_distrito(BD)
+cat("Rango Intercuartílico de precios de alquiler por distrito:\n")
+print(resultados_iqr)
+
+```
+
+*Análisis de descriptores*
+
+*Rango Intercuartílico* La dispersión de los datos del precio de alquiler de las habitaciones es muy variada en cada distrito a excepción de los distritos de Callao, Cercado de Lima, Comas, San Juan de Miraflores y Villa Maria del Triunfo, en donde dicha dispersión es nula. Con esta información podemos descartar el uso de la media o promedio de los precios de alquiler de habitaciones, puesto que, hay presencia de valores atípicos que van a influenciar en el valor de esta medida, lo cual, no será representativa a todo el conjunto de datos de cada distrito.
+
+*Mediana* A pesar de la presencia de valores atípicos, la mediana de cada distrito se mantiene relativamente robusta y no se ve influenciada de manera significativa por estos valores extremos en los precios de alquiler de habitaciones.
+
+-   **DIMENSIONES**
+
+```{r}
+# Media
+media_tamaño <- mean(BD$Tamaño)
+
+# Mediana
+mediana_tamaño <- median(BD$Tamaño)
+
+# Moda
+moda_tamaño <- as.numeric(names(sort(table(BD$Tamaño), decreasing = TRUE)[1]))
+
+# Rango
+rango_tamaño <- range(BD$Tamaño)
+
+# Desviación estándar
+desviacion_tamaño <- sd(BD$Tamaño)
+
+# Varianza
+varianza_tamaño <- var(BD$Tamaño)
+
+print("media_tamaño")
+media_tamaño
+
+print("mediana_tamaño")
+mediana_tamaño
+
+print("moda_tamaño")
+moda_tamaño
+
+print("rango_tamaño")
+rango_tamaño
+
+print("desviacion_tamaño")
+rango_tamaño
+
+print("varianza_tamaño")
+varianza_tamaño
+```
+
+```{r}
+summary(BD$Tamaño)
+```
+
+-   Media (Media aritmética): La media del tamaño de las habitaciones es de aproximadamente 35.46 metros cuadrados (m²).
+
+-   Mediana: La mediana del tamaño de las habitaciones es de 20 metros cuadrados (m²), lo que indica que la mitad de las habitaciones tienen un tamaño inferior o igual a 20 m² y la otra mitad tiene un tamaño superior a 20 m².
+
+-   Moda: La moda del tamaño de las habitaciones es de 12 metros cuadrados (m²), lo que significa que 12 m² es el valor que aparece con mayor frecuencia en el conjunto de datos.
+
+-   Rango: El rango del tamaño de las habitaciones es de 195 metros cuadrados (m²), lo que indica la diferencia entre el tamaño más pequeño (5 m²) y el tamaño más grande (200 m²).
+
+-   Desviación Estándar: La desviación estándar del tamaño de las habitaciones es de aproximadamente 60.83 metros cuadrados (m²). Esto sugiere una variabilidad moderada en los tamaños de las habitaciones en tus datos.
+
+-   Varianza: La varianza del tamaño de las habitaciones es de aproximadamente 3700.94 metros cuadrados (m²) al cuadrado.
+
+## ANALISIS DE VARIABLES SEGUN NUESTROS OBJETIVOS
+
+### OBJETIVOS GENERALES:
+
+1.Evaluar la calidad de las habitaciones disponibles para estudiantes universitarios en Lima Metropolitana, con el fin de identificar opciones óptimas para su bienestar y comodidad.
+
+2.Investigar en profundidad los diversos factores que impactan en el precio de alquiler de habitaciones destinadas a estudiantes universitarios en Lima, desentrañando los secretos detrás de las tarifas y proporcionando valiosas perspectivas sobre la economía de alquiler en la ciudad.
+
+3.Realizar un análisis detallado para determinar si las características de las habitaciones en alquiler en Lima se ajustan a las necesidades y preferencias de los estudiantes universitarios, garantizando una experiencia de vida académica y personal satisfactoria.
+
+### OBJETIVOS ESPECIFICOS:
+
+-   **1.1.Analizar las variables relacionadas con la comodidad de las habitaciones (como el estado de mantenimiento y la comodidad de la habitación) en función de la ubicación geográfica para identificar áreas con opciones de alquiler más adecuadas para estudiantes**
+
+**Amoblamiento por Lugar**
+
+```{r}
+#ver como hacwr, consultar 
+
+tabla_contingencia <- table(distrito, muebles)
+tabla_contingencia_rel <- round(prop.table(tabla_contingencia, margin = 1) * 100,2)  
+titulo <- "Tabla de Contingencia 1: Distribución de Amoblamiento por Lugar"
+cat(titulo, "\n\n")
+print(tabla_contingencia)
+print(tabla_contingencia_rel)
+
+```
+
+**Mantenimiento vs distrito** x= distrito donde se ubican los dormitorios (cualitativa nominal) y = nivel de mantenimiento que tienen los dormitorios (cualitativa ordinal)
+
+```{r}
+# 
+tabla_contingencia2 <- table(distrito, mantenimiento)
+tabla_contingencia_rel2 <- round(prop.table(tabla_contingencia2, margin = 1) * 100,2)  
+titulo <- "Tabla de Contingencia 2: Distribución de mantenimiento por Lugar"
+cat(titulo, "\n\n")
+print(tabla_contingencia_rel2)
+
+
+```
+
+observamos que los distrito con mejor mantenimiento de los dormitorios son cercado de lima y pueblo libre ,adicionalmente vemos que el distrito que tiene menor mantenimiento es el distrito de San juan de lurigancho. #-------------------------------------------------------------------------------------------------------------------------------------------**1.2. Utilizar gráficos y estadísticas descriptivas para comparas la calidad de habitaciones amobladas y no amobladas**
+
+Estadísticas Descriptivas
+
+Elegimos 2 variables:
+
+Para cumplir con nuestro objetivo analizaremos dos variables cualitativas, el estado de la habitación y calidad de habitaciones, para comparar y ver si las habitaciones amobladas se encuentran en las mejores condiciones...
+
+-   Estado de la habitación( amoblado o no amoblado): Variable cualitativa nominal
+
+-   Calidad de la habitacion (segun las imagenes,el nivel de deteriorado) : Variable cualitativa ordinal
+
+Comparamos gráficamente
+
+**1. Tabla de contigencia**
+
+```{r}
+# Crear la tabla de contingencia
+tabla_contingencia <- table(BD$Calidad_habitacion, BD$Amoblado)
+# Mostrar la tabla de contingencia con formato
+#knitr::kable(tabla_contingencia, 
+             #caption = "Tabla de Contingencia: Calidad de Habitación vs. Amoblado")
+             #col.names = c("No Amoblada", "Amoblada"))
+titulo <- "Tabla de Contingencia 3: Calidad de habitacion por amoblado"
+titulo
+print(tabla_contingencia)
+```
+
+**2. Grafico de mosaico**
+
+```{r}
+colores <- c("lightblue", "lightgreen", "lightcoral")  # Define una paleta de colores
+
+mosaicplot(table(BD$Calidad_habitacion, BD$Amoblado), 
+           main = "",
+           cex.axis = 0.7,  # Ajustar el tamaño del texto en el eje y
+           las = 1,         # Orientación vertical para el eje x, horizontal para el eje y
+           color = colores,
+           ylab = "Tipo de Habitación",
+        xlab = "Calidad Percibida") # Especificar la paleta de colores
+
+# Agregar un título con tamaño personalizado
+title(main = "Grafico N°3: Analisis de comparacion entre calidad y comodidad de las habitaciones", cex.main = 0.8)
+```
+
+Observamos que en la la calidad de los dormitorios no amoblados su calidad de mantenimiento es la mas minima con el resultado de 2 ,tambien podemos ver que la calidad de los dormitorios basicamente amoblado y completamnete amoblados oscilan entre 4 y 5 lo cual significaria que estan en muy buen estado de mantenimiento
+
+**3. Grafico boxplot**
+
+```{r}
+boxplot(BD$Calidad_habitacion ~ BD$Amoblado,
+        main = "Grafico N°4. Comparación de Calidad Percibida",
+        xlab = "Tipo de Habitación",
+        ylab = "Calidad Percibida" )
+```
+
+Para visualizar la comparación de la calidad percibida entre habitaciones amobladas y no amobladas, puede utilizar un gráfico de cajas (boxplot) o un gráfico de barras. #----------------------------------------------------------------------------------------------------------------------------------------- - **2.1.Realizar un análisis de regresión que examine cómo las variables como la ubicación, la distancia a la universidad y la presencia de servicios adicionales influyen en el precio mensual del alquiler.**
+
+-   Distrito y Precio de la habitación( cualitativa nominal vs cuantitativa continua) **TABLA**
+
+```{r}
+
+
+#df_media <- data.frame(Distrito = names(resultados_media), Media = resultados_media)
+df_mediana <- data.frame(Distrito = names(resultados_mediana), Mediana = resultados_mediana)
+df_moda <- data.frame(Distrito = names(resultados_moda), Moda = resultados_moda)
+df_iqr <- data.frame(Distrito = names(resultados_iqr), iqr = resultados_iqr)
+
+# Combinar los dataframes en uno solo por "Distrito"
+tabla_contingencia <- df_mediana %>%
+  #full_join(df_mediana, by = "Distrito") %>%
+  full_join(df_iqr, by = "Distrito") %>%
+  full_join(df_moda, by ="Distrito") 
+  #full_join(df_iqr, by = "Distrito")
+
+# Se renombra las columnas para evitar la repetición de la columna Distrito
+colnames(tabla_contingencia) <- c("Distrito", "Mediana" , "Rango Intercuartílico" , "Moda")
+
+kable(tabla_contingencia, caption = "Tabla 4: Medidas de resumen del precio de alquiler por distrito")
+
+
+```
+
+-   La dispersión de los datos del precio de alquiler de las habitaciones es muy variada en cada distrito a excepción de los distritos de Callao, Cercado de Lima, Comas, San Juan de Miraflores y Villa Maria del Triunfo, en donde dicha dispersión es nula. Con esta información podemos descartar el uso de la media o promedio de los precios de alquiler de habitaciones, puesto que, hay presencia de valores atípicos que van a influenciar en el valor de esta medida, lo cual, no será representativa a todo el conjunto de datos de cada distrito.
+
+-   A pesar de la presencia de valores atípicos, la mediana de cada distrito se mantiene relativamente robusta y no se ve influenciada de manera significativa por estos valores extremos en los precios de alquiler de habitaciones, por lo que se tomará para comparar los precios de alquiler de habitaciones de cada distrito de Lima.
+
+**GRÁFICAS**
+
+```{r}
+
+
+ggplot(BD, aes(x = Distrito, y = Precio)) +
+  geom_boxplot(fill = "blue", outlier.color = "red") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Gráfica 5: Precios de Alquiler por Distrito en Lima Metropolitana",
+       y = "Precio (soles)",
+       x = "Distritos de Lima")
+
+```
+
+-   En el distrito de Santiago de Surco hay una mayor variabilidad de precios de alquiler de habitaciones, esto se visualiza mediante la longitud de caja para dicho distrito.
+
+```{r}
+
+
+ggplot(tabla_contingencia, aes(x = Distrito, y = Mediana)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),
+        plot.title = element_text(margin = margin(b = 2)),
+        plot.margin = margin(20, 20, 5, 5)) +  
+  labs(title = "Gráfico 6: Mediana de Precios de Alquiler por Distrito en Lima Metropolitana",
+       y = "Mediana de Precio (soles)",
+       x = "Distritos de Lima")
+
+```
+
+-   El presente gráfico de barras muestra claramente la variación en los precios de alquiler entre los distritos. El distrito de Pueblo Libre se destaca como el más caro, con una mediana de alquiler significativamente más alta en comparación con los demás distritos. Por el contrario, el distrito Comas tiene la mediana de alquiler más baja.
+
+- ANALISIS DE NUMERO DE SERVICIOS POR DISTRITO:
+
+```{r}
+servicios=BD$Servicios
+distrito=BD$Distrito
+promedios_por_servicio <- aggregate(servicios~ distrito, datos, mean)
+
+# Crear un gráfico de barras con promedios
+grafico_barras2 <- ggplot(promedios_por_servicio, aes(x = distrito, y = servicios)) +
+  geom_bar(stat = "identity", fill = "purple", width = 0.5) +  # Ajustar el ancho de las barras
+  labs(title = "número de servicios por distrito",
+       x = "DISTRITOS",
+       y = "Promedio de número de servicios")
+
+# Añadir ajustes adicionales al gráfico
+grafico_barras2 +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  # Rotar nombres en el eje x
+  scale_x_discrete(labels = function(x) str_wrap(x, width = 40)) +  # Envolver nombres con str_wrap
+  theme(axis.text.y = element_text(size = 10))   # Ajustar el tamaño del texto en y
+```
+
+Observamos que el mayor numero de servicios adicional es en el distrito de callao y cercado de lima con 4 servicios adicionales  el distrito que tiene el menor numero de servicios adicional es comas seguido por villa María del Triunfo los cuales tienen   0 y 1 servicio adicional respectivamente,también nos  percatamos que todos  los distrito excepto comas y Villa María del Triunfo los servicios adicional oscilan entre 1 a 3 servicios adicionales lo cual aumentaría la comodidad del alumnado.
+
+
+
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+\-**2.2.Analizar visualmente la relación entre variables cuantitativas, como el precio y el tamaño de la habitación, utilizando gráficos de dispersión para detectar patrones y tendencias en los precios de alquiler.** \### Selección de variables:
+
+```{r}
+precio <- BD$Precio # Cauntitativa continua
+tamaño <- BD$Tamaño # Cuantitativa continua
+distrito <- BD$Distrito # Cualitativa nominal
+```
+
+### Análisis previo:
+
+```{r}
+summary(precio)
+summary(tamaño)
+```
+
+-   Se observa que el precio mínimo es de 250 soles y el máximo es de 2220 soles, mientras que el tamaño mínimo es de 5 m2 y el máximo es de 200 m2.
+-   Se observa que el precio promedio es de 798.8 soles y el tamaño promedio es de 34.94 m2.
+-   Se observa que el 50% de los precios se encuentran entre 550 y 900 soles, mientras que el 50% de los tamaños se encuentran entre 12 y 40.5 m2.
+-   Se observa que tamaño tiene una mayor dispersión que el precio, ya que su **rango intercuartílico es mayor**. \### Elección del gráfico:
+
+### Elección del gráfico:
+
+Utilizaremos **gráficos de dispersión** para visualizar la relación entre estas dos variables. \### Gráfico de dispersión: Al crear los gráficos de dispersión con burbujas, podemos personalizarlos según nuestras necesidades. Podemos agregar líneas de regresión para cuantificar la relación entre las variables y colorear los puntos según otros atributos, como el distrito. ( usar colores pastel para que no se vea tan cargado el gráfico)
+
+1.  Agrupamos los distritos en 3 grupos socienomicos segun [Peru Telegraph](https://www.perutelegraph.com/news/peru-living-lifestyle/lima-s-most-expensive-and-most-affordable-districts-to-buy-property):
+
+-   **Alto grado socioeconómico:** Barranco, Miraflores, San Isidro, San Borja, Santiago de Surco.
+-   **Grado socioeconómico medio:** Lince, San Miguel, Jesús María, La Molina, Pueblo Libre.
+-   **Bajo grado socioeconómico:** San Martín de Porres, Breña, San Juan de Miraflores, Surquillo, Ate, Chorrillos, La Victoria, Cercado de Lima, Villa Maria de Triunfo, San Juan de Lurigancho, Villa el Salvador, Los Olivos, Comas.
+
+```{r}
+# Agrupamos los distritos en 3 grupos
+distrito <- as.factor(BD$Distrito)
+distrito <- ifelse(distrito %in% c("Barranco", "Miraflores", "San Isidro", "San Borja", "Santiago de Surco"), "Socieconomico Alto", ifelse(distrito %in% c("Lince", "San Miguel", "Jesús María", "La Molina", "Pueblo Libre"), "Socieconomico Medio", "Socieconomico Bajo"))
+```
+
+```{r}
+library(ggplot2)
+ggplot(BD, aes(x = tamaño, y = precio, color = distrito)) + geom_point() + geom_smooth(method = "lm", se = FALSE) + scale_color_manual(values = c("Socieconomico Alto" = "#F8766D", "Socieconomico Medio" = "#00BA38", "Socieconomico Bajo" = "#619CFF")) + labs(x = "Tamaño (m2)", y = "Precio (S/.)", color = "Distrito",title = "Grafico N°7: Relación entre Tamaño y Precio segun su nivel socieconomico") + theme_minimal()
+
+
+```
+
+2.  Agrupamos por distritos segun la cantidad de datos recolectados presnetes en la base de datos (Frencuencia Alta, Media y Baja)
+
+```{r}
+fi=table(BD$Distrito)
+pi=round(prop.table(fi)*100,2)
+cbind(fi,pi)
+```
+
+Vemos que los distritos con mayor frecuencia son: Santiago de Surco, Miraflores y San Miguel. Por lo que agruparemos los distritos en 3 grupos:
+
+```{r}
+distrito <- as.factor(BD$Distrito)
+# Agrupamos en 3 grupos por su frecuencia:
+distrito <- ifelse(distrito %in% c("Santiago de Surco", "Miraflores", "San Miguel"), "Frecuencia Alta", ifelse(distrito %in% c("Lince", "San Isidro", "La Molina", "San Borja", "Barranco", "Jesús María", "Pueblo Libre"), "Frecuencia Media", "Frecuencia Baja"))
+```
+
+Grafioc de dispersión con burbujas con colores pastel agradables y agrupados por frecuencia de distritos
+
+```{r}
+ggplot(BD, aes(x = tamaño, y = precio, color = distrito)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(values = c("Frecuencia Alta" = "#F8766D", "Frecuencia Media" = "#00BA38", "Frecuencia Baja" = "#619CFF")) +
+  labs(
+    x = "Tamaño (m2)",
+    y = "Precio (S/.)",
+    color = "Distrito",
+    title = "Grafico N°8: Relación entre Tamaño y Precio por Distrito"
+  ) +
+  theme_minimal()
+```
+
+### Interpretación:
+
+-   Se observa que existe una relación positiva entre el precio y el tamaño de la habitación, es decir, a mayor tamaño, mayor precio.
+-   Se observa que la relación entre el precio y el tamaño de la habitación es más fuerte en los distritos de **grado socioeconómico medio** contrario a lo que se esperaba, ya que se esperaba que la relación fuera más fuerte en los distritos de **alto grado socioeconómico**.
+-   Se obserba que de la muestra recolectada, entre los distritos con mas frecuencia de datos recolectados, la relación entre el precio y el tamaño de la habitación es más fuerte en los distritos de **frecuencia media**. #----------------------------------------------------------------------------------------------------------------------------------------------------
+
+**3.1.Evaluar las valoraciones de los estudiantes sobre la descripción de las habitaciones y su relación con la calidad percibida, utilizando estadísticas descriptivas y gráficos para resaltar cualquier discrepancia entre las expectativas y la realidad.**
+
+Realizamos una analisis entre Descripción y su relacion con la calidad de habitaciones: dos variables cualitativas
+
+```{r}
+# Gráfico de dispersión mejorado para 'Descripcion' vs 'Calidad_habitacion' con ggplot2
+ggplot(DATA, aes(x=Descripcion, y=Calidad_habitacion)) +
+  geom_point(aes(color=Descripcion), size=3) +
+  geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") +
+  labs(title="Grafico N°9: Descripción vs Calidad de la habitación", x="Descripción", y="Calidad") +
+  theme_minimal() +
+  scale_color_discrete(name="Descripción")
+```
+
+# **Gráfico de dispersión 'Descripción vs Calidad de la habitación':**
+
+Este gráfico muestra la relación entre las valoraciones de los estudiantes sobre la descripción de las habitaciones y la calidad percibida. Cada punto representa una observación en los datos, con su posición en el eje x correspondiente a su valoración y su posición en el eje y correspondiente a su calidad. Los colores diferentes para cada punto ayudan a distinguir entre las diferentes categorías. La línea negra discontinua representa una línea de tendencia, que ayuda a visualizar la relación general entre las dos variables. Este gráfico es útil para entender cómo se relacionan las valoraciones de los estudiantes con la calidad percibida.
+
+**Conclusiones**
+
+**Gráfico de dispersión (Tamaño de la habitación vs Precio):** Este gráfico te ayudara a entender si existe una correlación entre el tamaño de la habitación y el precio. Si los puntos en el gráfico forman una línea ascendente, esto indica que a medida que el tamaño de la habitación aumenta, también lo hace el precio. Si los puntos están dispersos sin un patrón claro, esto indica que no hay una relación fuerte entre el tamaño de la habitación y el precio.
+
+**Boxplot (Ubicación de la habitación vs Precio):** Este gráfico proporciona información sobre cómo varía el precio de las habitaciones en diferentes ubicaciones. Cada caja en el gráfico representa el rango intercuartil (IQR) de los precios en esa ubicación, con la línea dentro de la caja que representa la mediana. Los "bigotes" de la caja representan los valores dentro de 1.5 veces el IQR. Los puntos fuera de los bigotes se podria considerar como valores atípicos. Si las cajas para diferentes ubicaciones tienen diferentes alturas o posiciones, esto indicaria que el precio de las habitaciones varía según la ubicación.
+
+#------------------------------------------------------------------------------------------------------------------------------------------
+
+-   **3.2. Investigar si la disponibilidad de transporte público cercano tiene un impacto significativo en la elección de las habitaciones por parte de los estudiantes, mediante análisis de frecuencias y gráficos de barras para mostrar la preferencia en función de esta variable.**
+
+x= distrito donde se ubican los dormitorios (cualitativa nominal) y=numero de transporte cercano al dormitorio(cuantitativa discreta)
+
+```{r}
+grafico_lineas <- ggplot(datos, aes(x = Distrito, y = num_transporte, group = Distrito)) +
+  geom_line(color = "skyblue") +
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 3, fill = "red") +
+  labs(title = "Grafico 10: Número de transporte por distrito",
+       x = "DISTRITOS",
+       y = "Número de transporte promedio") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Inclinar nombres en el eje x
+
+# Mostrar el gráfico
+print(grafico_lineas)
+
+
+```
+
+Como observamos el cercado de lima tiene el amyor numero de transporte cerca a los dormitorios y el distrito que tiene menos tranportes a su alrededor es villa el salvador ,adicionalmente observamos que los distritos su numero de transporte oscila entre 3 a 4 transportes cerca de los dormitorios lo cual le beneficia al alumnado en busca de un dormitorio ,ya que le facilita el traslado de un lugar a otro.

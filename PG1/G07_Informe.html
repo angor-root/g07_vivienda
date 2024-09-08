@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Evaluación de la Calidad de Habitaciones para Estudiantes en Lima en el Año 2023: Un Análisis Post-Pandemia</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="G07_Informe_files/libs/clipboard/clipboard.min.js"></script>
+<script src="G07_Informe_files/libs/quarto-html/quarto.js"></script>
+<script src="G07_Informe_files/libs/quarto-html/popper.min.js"></script>
+<script src="G07_Informe_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="G07_Informe_files/libs/quarto-html/anchor.min.js"></script>
+<link href="G07_Informe_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="G07_Informe_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="G07_Informe_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="G07_Informe_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="G07_Informe_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Evaluación de la Calidad de Habitaciones para Estudiantes en Lima en el Año 2023: Un Análisis Post-Pandemia</h1>
+<p class="subtitle lead">G07 Calidad de Habitaciones</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div style="text-align: justify">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Instalación de librerías necesarias</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>BD <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"BD.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<table class="table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 27%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Nombre y Apellidos</strong></th>
+<th><strong>Código de Estudiante</strong></th>
+<th><strong>Correo Electrónico</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Caleb Churata Berna (Lider)</td>
+<td>202202131</td>
+<td>caleb.churata@utec.edu.pe</td>
+</tr>
+<tr class="even">
+<td>Anthuanett Kiara Viracocha Cruz</td>
+<td>202220276</td>
+<td>anthuanett.viracocha@utec.edu.pe</td>
+</tr>
+<tr class="odd">
+<td>Ann Pauline Lliuya Castillon</td>
+<td>202120322</td>
+<td>ann.lliuya@utec.edu.pe</td>
+</tr>
+<tr class="even">
+<td>Leonardo Galvez Martinez</td>
+<td>202110135</td>
+<td>leonardo.galvez@utec.edu.pe</td>
+</tr>
+<tr class="odd">
+<td>Maria Isabel Quinte Medina</td>
+<td>202120459</td>
+<td>maria.quinte@utec.edu.pe</td>
+</tr>
+</tbody>
+</table>
+<section id="introducción" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introducción</h1>
+<section id="relevancia" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="relevancia"><span class="header-section-number">1.1</span> Relevancia</h2>
+<p>Nuestro proyecto busca analizar las características de las habitaciones disponibles para alquiler en Lima Metropolitana, 2023, con el objetivo de proporcionar a los estudiantes universitarios una visión clara y completa que les permita tomar decisiones informadas sobre su alojamiento. En el contexto actual, donde los estudiantes pueden tener horarios y responsabilidades variadas, es crucial que tengan acceso a información detallada y precisa sobre sus opciones de alojamiento. Nuestro estudio se centrará en diversas características de las habitaciones, como la ubicación, el precio, la proximidad a las universidades y la disponibilidad de servicios adicionales.</p>
+</section>
+<section id="objetivo-general" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="objetivo-general"><span class="header-section-number">1.2</span> Objetivo general</h2>
+<p>Recopilar y presentar datos sobre habitaciones y departamentos disponibles para alquiler en diversas ubicaciones cercanas a universidades en Lima Metropolitana, año 2023, permitiendo a los estudiantes universitarios explorar y seleccionar opciones de vivienda que se ajusten a sus preferencias y presupuesto.</p>
+</section>
+<section id="objetivos-especificos" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="objetivos-especificos"><span class="header-section-number">1.3</span> Objetivos especificos</h2>
+<ol type="1">
+<li>Evaluar la calidad de las habitaciones para estudiantes universitarios en Lima Metropolitana, año 2023, con el fin de identificar opciones óptimas para su bienestar y comodidad.</li>
+<li>Investigar en profundidad los diversos factores que impactan en el precio de alquiler de habitaciones destinadas a estudiantes universitarios en Lima Metropolitana, año 2023, desentrañando los secretos detrás de las tarifas y proporcionando valiosas perspectivas sobre la economía de alquiler en la ciudad.</li>
+<li>Determinar si las características de las habitaciones en alquiler en Lima se ajustan a las necesidades y preferencias de los estudiantes universitarios, garantizando una experiencia de vida académica y personal satisfactoria.</li>
+</ol>
+</section>
+<section id="planificación" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="planificación"><span class="header-section-number">1.4</span> Planificación</h2>
+<p>Para realizar este proyecto elaboramos un diagrama de Gantt donde se muestra nuestros progresos de acuerdo a las fechas de inicio y fin de las distintas actividades para el desarrollo del proyecto.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ forcats   1.0.0     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values (`geom_rect()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="G07_Informe_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="recolección-de-datos" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="recolección-de-datos"><span class="header-section-number">1.5</span> Recolección de datos</h2>
+<table class="table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 70%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Paso</strong></th>
+<th><strong>Descripción</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><strong>Definición de variables</strong>:<br>Se elaboro las variables a considerar para la recolección de datos de ambientes en alquiler para estudiantes en Lima Metropolitana en 2023.</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><strong>Fuentes de Información</strong>:<br>La lista se fue generando a partir de diversas fuentes en linea, incluyendo anuncios en línea y agencias inmobiliarias.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><strong>Selección de Estrategias</strong>:<br>Esta estrategia se eligió para garantizar la representativo y diversidad en la muestra, realizando para eso una debida limpieza de datos.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><strong>Condiciones Específicas</strong>:<br>La recolección de datos se llevó a cabo durante un período específico en 2023, considerando la disponibilidad y variabilidad estacional,de acorde a nuestras variables definidas.</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><strong>Diversidad de la Muestra</strong>:<br>La estrategia incluyó diferentes fuentes y condiciones, asegurando la inclusión de ambientes destinados a estudiantes.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="población" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="población"><span class="header-section-number">1.6</span> Población</h2>
+<p>Todos los ambientes en alquiler para estudiantes o universitarios de Lima Metropolitana en el año 2023.</p>
+</section>
+<section id="muestra" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="muestra"><span class="header-section-number">1.7</span> Muestra</h2>
+<p>180 cuartos en alquiler en Lima Metropolitana en el año 2023.</p>
+</section>
+<section id="muestreo" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="muestreo"><span class="header-section-number">1.8</span> Muestreo</h2>
+<p>Para llevar a cabo el muestreo, se obtendrá una lista de todos los ambientes en alquiler destinados a estudiantes en Lima Metropolitana durante el año 2023. Para realizar este proceso ser recopilara datos de diversas fuentes online, como anuncios en línea, agencias inmobiliarias, universidades y otros recursos disponibles.</p>
+</section>
+<section id="variables" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="variables"><span class="header-section-number">1.9</span> Variables</h2>
+<style>
+  th {
+    background-color: #3498db; /* Color de fondo para las celdas de encabezado */
+    color:#000000  ; /* Color de texto para las celdas de encabezado */
+  }
+
+  tr:nth-child(even) {
+    background-color: #FBE5FB ; /* Color de fondo para filas pares */
+  }
+
+  tr:nth-child(odd) {
+    background-color:#F0DCF0  ; /* Color de fondo para filas impares */
+  }
+</style>
+<table class="table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Descripción</th>
+<th>Tipo de Variable</th>
+<th>Restricciones Posibles</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Distrito</td>
+<td>Ubicación del ambiente a alquilar</td>
+<td>Cualitativa (Nominal)</td>
+<td>No puede ser un distrito que no pertenezca a Lima Metropolitana. No puede ser numérica.</td>
+</tr>
+<tr class="even">
+<td>Universidad</td>
+<td>Universidad cercana a la habitación</td>
+<td>Cualitativa (Nominal)</td>
+<td>No pueden ser universidades diferentes a las existentes en Lima Metropolitana. No puede ser numérica.</td>
+</tr>
+<tr class="odd">
+<td>Dias_de_publicación</td>
+<td>Cantidad de días que ha estado publicada la oferta</td>
+<td>Cuantitativa (Discreta)</td>
+<td>No pueden ser negativo ni decimal.</td>
+</tr>
+<tr class="even">
+<td>Tiempo_transporte</td>
+<td>Tiempo en desplazarse del cuarto a la universidad (minutos)</td>
+<td>Cuantitativa (Continua)</td>
+<td>No puede ser negativa, ni expresada en otra unidad diferente a minutos.</td>
+</tr>
+<tr class="odd">
+<td>Transporte_bool</td>
+<td>Existe o no existe transporte publico cercano</td>
+<td>Cualitativa (Nominal)</td>
+<td>No puede ser transporte privado. No puede ser numérica.</td>
+</tr>
+<tr class="even">
+<td>Transporte_int</td>
+<td>Cantidad de transportes públicos</td>
+<td>Cuantitativa (Discreta)</td>
+<td>No puede ser negativa ni decimal.</td>
+</tr>
+<tr class="odd">
+<td>Precio</td>
+<td>Precio del alquiler por mes (soles)</td>
+<td>Cuantitativa (Continua)</td>
+<td>No puede estar expresada en otra moneda, ni ser de tipo carácter.</td>
+</tr>
+<tr class="even">
+<td>Tamaño</td>
+<td>Dimensiones del cuarto (área en m²)</td>
+<td>Cuantitativa (Continua)</td>
+<td>No puede estar en una unidad diferente a metros cuadrados (m²), ni negativa.</td>
+</tr>
+<tr class="odd">
+<td>Servicios</td>
+<td>Cantidad de servicios adicionales</td>
+<td>Cuantitativa (discreta)</td>
+<td>No puede ser decimal ni carácter, tampoco negativa.</td>
+</tr>
+<tr class="even">
+<td>Tiendas</td>
+<td>Cantidad de tiendas o centros de abastecimientos cercanos</td>
+<td>Cuantitativa (Discreta)</td>
+<td>No puede ser negativa ni decimal. No puede ser carácter.</td>
+</tr>
+<tr class="odd">
+<td>Distancia</td>
+<td>Distancia del cuarto a la universidad (km)</td>
+<td>Cuantitativa (Continua)</td>
+<td>No puede ser negativa ni en otra unidad diferente a Kilómetros (Km)</td>
+</tr>
+<tr class="even">
+<td>Amoblado</td>
+<td>Comodidad de habitación (amoblado, semi amoblado, no amoblado)</td>
+<td>Cualitativa (Nominal)</td>
+<td>No puede ser numérica ni diferente a las opciones de selección.</td>
+</tr>
+<tr class="odd">
+<td>Baño</td>
+<td>Disponibilidad del servicio higiénico (compartido, privado, no aplica)</td>
+<td>Cualitativa (Nominal)</td>
+<td>Solo puede ser de entre las opciones disponibles (compartido, privado, no aplica)</td>
+</tr>
+<tr class="even">
+<td>confiabilidad_servicios</td>
+<td>Nivel de confiabilidad de los servicios de Internet y electricidad</td>
+<td>Cualitativa (Ordinal)</td>
+<td>Solo puede estar entre la escala numérica establecida en en la encuesta (1 al 5).</td>
+</tr>
+<tr class="odd">
+<td>Calidad_habitacion</td>
+<td>Estado de mantenimiento (muy deteriorado, muy bien mantenido)</td>
+<td>Cualitativa (Ordinal)</td>
+<td>Solo puede estar entre la escala numérica establecida en en la encuesta (1 al 5).</td>
+</tr>
+<tr class="even">
+<td>Comunicacion</td>
+<td>Facilidad de comunicaciones con el propietario o arrendador</td>
+<td>Cualitativa (Ordinal)</td>
+<td>Solo puede estar entre la escala numérica establecida en en la encuesta (1 al 5).</td>
+</tr>
+<tr class="odd">
+<td>Descripcion</td>
+<td>Valoración de la descripción de la habitación (escala del 1 al 5)</td>
+<td>Cualitativa (Ordinal)</td>
+<td>Solo puede estar entre la escala numérica establecida en en la encuesta (1 al 5).</td>
+</tr>
+<tr class="even">
+<td>Roomate</td>
+<td>Estilo de alquiler, si es para solamente hombres o mujeres o sin roomate.</td>
+<td>Cualitativa (Nominal)</td>
+<td>Solamente puede ser: Solo Damas, Hombres, Cualquiera o no menciona.</td>
+</tr>
+<tr class="odd">
+<td>Fumar</td>
+<td>Aceptación de fumadores (sí, no)</td>
+<td>Cualitativa (Nominal)</td>
+<td>Solamente puede ser Sí o No.</td>
+</tr>
+<tr class="even">
+<td>Mascotas</td>
+<td>Aceptación de mascotas (sí, no)</td>
+<td>Cualitativa (Nominal)</td>
+<td>Solamente puede ser Sí o No.</td>
+</tr>
+<tr class="odd">
+<td>Fiesta</td>
+<td>Tolerancia a fiestas en la habitación (sí, no)</td>
+<td>Cualitativa (Nominal)</td>
+<td>Solamente puede ser Sí o No.</td>
+</tr>
+<tr class="even">
+<td>Niños</td>
+<td>Aceptación de niños (sí, no)</td>
+<td>Cualitativa (Nominal)</td>
+<td>Solamente puede ser Sí o No.</td>
+</tr>
+<tr class="odd">
+<td>Sitio_web</td>
+<td>Presencia de sitio web de la oferta (sí, no)</td>
+<td>Cualitativa (Nominal)</td>
+<td>No puede ser un dato diferente a url.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="limpieza-de-datos" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="limpieza-de-datos"><span class="header-section-number">1.10</span> Limpieza de datos</h2>
+<p>Después de realizar nuestra recolección de datos, obtuvimos un <strong>DataSet</strong> llamado <code>Evaluación de la calidad de habitaciones para estudiantes en Lima en el  2023</code>, para tener una mejor visualización de nuestros datos y diferentes cambios en nuestro <strong>DataSet</strong>:</p>
+<section id="cambio-de-nombres" class="level3" data-number="1.10.1">
+<h3 data-number="1.10.1" class="anchored" data-anchor-id="cambio-de-nombres"><span class="header-section-number">1.10.1</span> Cambio de nombres:</h3>
+<ol type="1">
+<li>Cambio de nombre del <strong>DataSet</strong> de <code>Evaluación de la calidad de habitaciones para estudiantes en Lima en el  2023</code> a <code>BD</code>.</li>
+<li>Cambio de nombre de todas las variables, pues tenían por nombre la pregunta que se realizo para obtener la información, se cambio a un nombre mas corto y entendible. Usando la función <code>colnames()</code>, por ejemplo: <code>colnames(BD)[5] = "Universidad"</code> -&gt; Cambio de nombre de la variable 5 a “Universidad”. Se hizo de la misma manera con las 22 variables restantes. Las 2 primeras corresponden a la marca temporal y el nombre de la persona que realizo la encuesta.</li>
+</ol>
+</section>
+<section id="verificación-y-normalización-de-datos" class="level3" data-number="1.10.2">
+<h3 data-number="1.10.2" class="anchored" data-anchor-id="verificación-y-normalización-de-datos"><span class="header-section-number">1.10.2</span> Verificación y normalización de datos:</h3>
+<ol type="1">
+<li>Primero se verificó que <code>BD</code> no tenga datos incompletos, para eso se utilizó la función <code>sum(!complete.cases(BD))</code> y se obtuvo que no hay datos incompletos.</li>
+<li>Se verificó con la función <code>unique()</code> que las variables <code>Universidad</code> y <code>Distrito</code> tenían datos mal escritos:
+<ol type="1">
+<li><strong><code>Universidad</code></strong>: Al ser todas siglas de universidades, usamos la función <code>toupper()</code> para que todas las siglas estén en mayúsculas, reduciendo así la cantidad de categorías. Sin embargo, se encontraron datos como: <code>UL</code> que hace referencia a la Universidad de Lima -&gt; <code>ULIMA</code>.</li>
+<li><strong><code>Distrito</code></strong>: Para normalizar esta variable usamos <code>str_to_title()</code> de la librería <code>stringr</code>. Posteriormente tuvimos que corregir algunas incidencias mal escritas como por ejemplo: <code>Chorrrillos"</code> -&gt; <code>Chorrillos"</code>.</li>
+</ol></li>
+<li>Para las variables numéricas, luego de usar la función <code>str()</code> para ver el tipo de dato, se encontró que las variables <code>Precio</code> y <code>Distancia</code> estaban como <code>chr</code>, por lo que se usó la función <code>as.numeric()</code> para convertirlos a <code>num</code>.</li>
+<li>Por ultimo para dejar prolija y para su uso en nuestra investigación las variables de tipo <code>chr</code> se convirtieron a <code>factor</code> usando la función <code>as.factor()</code>.</li>
+</ol>
+<p>Por ultimo, mostramos la base de datos final con la función <code>str()</code>:</p>
+</section>
+</section>
+</section>
+<section id="análisis-descriptivo" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Análisis descriptivo</h1>
+<p>A continuación, procederemos a ofrecer una detallada exposición de los diversos elementos gráficos y numéricos destinados a ilustrar nuestras variables más significativas. Esta meticulosa presentación permitirá un análisis descriptivo profundo y enriquecedor para el cumplimiento de los objetivos establecidos en el presente trabajo de estudio.</p>
+<p>Antes de ello mostraremos las variables seleccionadas para realizar un análisis de estas:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th><strong>Variable</strong></th>
+<th><strong>Tipo de Variable</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Distrito</td>
+<td>Nominal</td>
+</tr>
+<tr class="even">
+<td>Amoblado</td>
+<td>Nominal</td>
+</tr>
+<tr class="odd">
+<td>Calidad_habitación</td>
+<td>Ordinal</td>
+</tr>
+<tr class="even">
+<td>Precio</td>
+<td>Continua</td>
+</tr>
+<tr class="odd">
+<td>Numero de servicios</td>
+<td>Discreta</td>
+</tr>
+<tr class="even">
+<td>Numero de transporte</td>
+<td>Discreta</td>
+</tr>
+<tr class="odd">
+<td>Dimensiones</td>
+<td>Continua</td>
+</tr>
+<tr class="even">
+<td>Descripción</td>
+<td>Ordinal</td>
+</tr>
+</tbody>
+</table>
+<section id="objetivos-especificos-1" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="objetivos-especificos-1"><span class="header-section-number">2.1</span> Objetivos especificos</h2>
+</section>
+<section id="evaluar-la-calidad-de-las-habitaciones-disponibles-para-estudiantes-universitarios-en-lima-metropolitana-con-el-fin-de-identificar-opciones-óptimas-para-su-bienestar-y-comodidad." class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="evaluar-la-calidad-de-las-habitaciones-disponibles-para-estudiantes-universitarios-en-lima-metropolitana-con-el-fin-de-identificar-opciones-óptimas-para-su-bienestar-y-comodidad."><span class="header-section-number">2.2</span> Evaluar la calidad de las habitaciones disponibles para estudiantes universitarios en Lima Metropolitana, con el fin de identificar opciones óptimas para su bienestar y comodidad.</h2>
+<p>Para el cumplimiento del presente objetivo, se evaluará las siguientes variables.</p>
+<section id="relación-entre-amoblamiento-de-la-habitación-tipo-de-habitación-y-el-sector-al-que-pertenece-el-distrito" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="relación-entre-amoblamiento-de-la-habitación-tipo-de-habitación-y-el-sector-al-que-pertenece-el-distrito"><span class="header-section-number">2.2.1</span> Relación entre amoblamiento de la habitación (tipo de habitación) y el sector al que pertenece el distrito</h3>
+<ul>
+<li>La variable distrito es una variable cualitativa nominal que indica los distritos de Lima en los que se realizó el estudio.</li>
+<li>La variable Amoblado es una variable cualitativa nominal que muestra la conservación de la habitación (No amoblado,Básicamente amoblado,Completamente amoblado)</li>
+</ul>
+<p>Agrupamos los distritos de Lima en 4 divisiones según su ubicación:</p>
+<ul>
+<li>Lima Norte : Los Olivos, San Martín de Porres, Comas, Callao.</li>
+<li>Lima Sur : San Juan de Miraflores, Villa María del Triunfo, Villa el Salvador.</li>
+<li>Lima Este : Ate, San Juan de Lurigancho.</li>
+<li>Lima Oeste : Breña, Cercado de Lima, Jesús María, La Molina, La Victoria, Lince, Lima Metropolitana, Miraflores, Barranco, Chorrillos, San Borja, Santiago de Surco, San Isidro, San Miguel, Surquillo, Pueblo Libre.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>BD <span class="ot">&lt;-</span> BD <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Zona =</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    Distrito <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Ate"</span>, <span class="st">"San Juan de Lurigancho"</span>) <span class="sc">~</span> <span class="st">"Lima Este"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    Distrito <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Callao"</span>, <span class="st">"Comas"</span>, <span class="st">"Los Olivos"</span>, <span class="st">"San Martín de Porres"</span>) <span class="sc">~</span> <span class="st">"Lima Norte"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    Distrito <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"San Juan de Miraflores"</span>, <span class="st">"Villa María del Triunfo"</span>, <span class="st">"Villa el Salvador"</span>) <span class="sc">~</span> <span class="st">"Lima Sur"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    Distrito <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Breña"</span>, <span class="st">"Cercado de Lima"</span>, <span class="st">"Jesús María"</span>, <span class="st">"La Molina"</span>, <span class="st">"La Victoria"</span>, <span class="st">"Lince"</span>, <span class="st">"Lima Metropolitana"</span>, <span class="st">"Miraflores"</span>, <span class="st">"Barranco"</span>, <span class="st">"Chorrillos"</span>, <span class="st">"San Borja"</span>, <span class="st">"Santiago de Surco"</span>, <span class="st">"San Isidro"</span>, <span class="st">"San Miguel"</span>, <span class="st">"Surquillo"</span>, <span class="st">"Pueblo Libre"</span>) <span class="sc">~</span> <span class="st">"Lima Oeste"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(BD, <span class="st">"BD_con_Zona.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Distrito =</span> BD<span class="sc">$</span>Zona, <span class="at">Amoblado =</span> BD<span class="sc">$</span>Amoblado)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>tabla_contingencia_df <span class="ot">&lt;-</span> <span class="fu">table</span>(data_df)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>tabla_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame.matrix</span>(tabla_contingencia_df)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>titulo <span class="ot">&lt;-</span> <span class="st">"Tabla 1: Distribución de Amoblamiento por Lugar"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(titulo, <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tabla 1: Distribución de Amoblamiento por Lugar </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(tabla_df, <span class="at">caption =</span> titulo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Tabla 1: Distribución de Amoblamiento por Lugar</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Basicamente amoblada</th>
+<th style="text-align: right;">Completamente amoblada</th>
+<th style="text-align: right;">No amoblada</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Lima Este</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lima Norte</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lima Oeste</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lima Sur</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><em>Análisis</em>:</p>
+<ul>
+<li><p>Podemos observar que el mejor sector de Lima para alquilar una habitación es <em>Lima Oeste</em> ya que cuenta con 44 habitaciones completamente amobladas y 44 habitaciones básicamente amobladas, de nuestra muestra de 180 habitaciones.</p></li>
+<li><p>El peor sector de Lima para alquilar una habitación es <em>Lima Este</em> ya que cuenta con 3 habitaciones no amobladas y 1 habitación básicamente amoblada, de nuestra muestra de 180 habitaciones.</p></li>
+</ul>
+</section>
+<section id="relación-entre-amoblamiento-de-la-habitación-tipo-de-habitación-y-calidad-de-habitación" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="relación-entre-amoblamiento-de-la-habitación-tipo-de-habitación-y-calidad-de-habitación"><span class="header-section-number">2.2.2</span> Relación entre amoblamiento de la habitación (tipo de habitación) y calidad de habitación</h3>
+<ul>
+<li><p>La variable tipo de amoblado es una variable cualitativa nominal que indica el nivel de amoblamiento de dicha habitación (no amoblado, básicamente amoblado y completamente amoblado).</p></li>
+<li><p>La variable calidad de habitación es una variable cuantitativa ordinal que muestra la conservación de la habitación en alquiler (2: Descuidado , 3: Algo descuidado , 4: Cuidado , 5: Muy bien cuidado)</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>BD<span class="sc">$</span>Calidad_habitacion <span class="ot">&lt;-</span> <span class="fu">factor</span>(BD<span class="sc">$</span>Calidad_habitacion, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Descuidado"</span>, <span class="st">"Algo descuidado"</span>, <span class="st">"Cuidado"</span>, <span class="st">"Muy bien cuidado"</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>tabla_contingencia <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">Calidad_habitacion =</span> BD<span class="sc">$</span>Calidad_habitacion, <span class="at">Amoblado =</span> BD<span class="sc">$</span>Amoblado)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>tabla_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame.matrix</span>(tabla_contingencia)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>titulo <span class="ot">&lt;-</span> <span class="st">"Tabla 2 : Calidad de habitación por amoblado"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(titulo, <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tabla 2 : Calidad de habitación por amoblado </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabla_df, <span class="at">caption =</span> titulo, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Básicamente Amoblada"</span>, <span class="st">"Completamente Amoblada"</span>, <span class="st">"No amoblado"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Tabla 2 : Calidad de habitación por amoblado</caption>
+<colgroup>
+<col style="width: 23%">
+<col style="width: 28%">
+<col style="width: 31%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Básicamente Amoblada</th>
+<th style="text-align: right;">Completamente Amoblada</th>
+<th style="text-align: right;">No amoblado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Descuidado</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Algo descuidado</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cuidado</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Muy bien cuidado</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">25</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Amoblado <span class="ot">&lt;-</span> BD<span class="sc">$</span>Amoblado</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>Calidad <span class="ot">&lt;-</span> BD<span class="sc">$</span>Calidad_habitacion</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>colores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"deeppink3"</span>, <span class="st">"darkslategray3"</span>, <span class="st">"#9A32CD"</span>, <span class="st">"darkorange"</span>)  <span class="co"># Definición de paleta de colores</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaicplot</span>(<span class="fu">table</span>(Amoblado, Calidad), </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">main =</span> <span class="st">""</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">cex.axis =</span> <span class="fl">0.7</span>,  <span class="co"># Ajustar el tamaño del texto en el eje y</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">las =</span> <span class="dv">1</span>,         <span class="co"># Orientación vertical para el eje x, horizontal para el eje y</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> colores,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylab =</span> <span class="st">"Calidad Percibida"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Nivel de amoblado"</span>) </span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main =</span> <span class="st">"Gráfico N°1 : Distribución por calidad y según tipo de amoblado"</span>, <span class="at">cex.main =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="G07_Informe_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><em>Análisis</em>:</p>
+<ul>
+<li>Podemos observar que el mejor tipo de amoblado para alquilar una habitación es <strong>Completamente Amoblada</strong> ya que cuenta con 44 habitaciones completamente amobladas y 44 habitaciones básicamente amobladas, de nuestra muestra de 180 habitaciones.</li>
+</ul>
+</section>
+<section id="relación-entre-la-calidad-media-de-las-habitaciones-en-alquiler-por-distrito" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="relación-entre-la-calidad-media-de-las-habitaciones-en-alquiler-por-distrito"><span class="header-section-number">2.2.3</span> Relación entre la calidad media de las habitaciones en alquiler por distrito</h3>
+<p>Tomar en cuenta el promedio de calidad de las habitaciones en alquiler por distrito se convierte en un factor relevante al momento de elegir la ubicación para alquilar una habitación en Lima, especialmente para estudiantes.</p>
+<ul>
+<li>La variable de calidad de habitación es una variable cualitativa ordinal que indica el nivel conservación de la habitación de una escala del 2 a 5, (2 :Descuidado, 3: Algo descuidado, 4: Cuidado, 5:Muy bien cuidado).</li>
+<li>La variable distrito es una variable cualitativa nominal que indica los distritos de Lima Metropolitana.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Distrito<span class="ot">&lt;-</span>BD<span class="sc">$</span>Distrito</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>Calidad <span class="ot">&lt;-</span>BD<span class="sc">$</span>Calidad_habitacion</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>tabla_contingencia <span class="ot">&lt;-</span> <span class="fu">table</span>(Distrito, Calidad)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>chi_squared_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(tabla_contingencia)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in chisq.test(tabla_contingencia): Chi-squared approximation may be
+incorrect</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>grafico_barras <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> BD, <span class="fu">aes</span>(<span class="at">x =</span> Distrito, <span class="at">fill =</span> <span class="fu">factor</span>(Calidad))) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>, <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Gráfica N°2 : Distribución de calidad por distrito"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Distrito"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Porcentaje"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Calidad"</span>) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(grafico_barras)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="G07_Informe_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><em>Análisis</em>:</p>
+<ul>
+<li>Observamos que el distrito con habitaciones en alquiler muy bien cuidado es Pueblo Libre y Cercado de Lima ,en cambio el distrito con las habitaciones descuidadas en alquiler es Villa María del Triunfo y San Juan de Lurigancho.</li>
+</ul>
+</section>
+</section>
+<section id="investigar-en-profundidad-los-diversos-factores-que-impactan-en-el-precio-de-alquiler-de-habitaciones-destinadas-a-estudiantes-universitarios-en-lima-desentrañando-los-secretos-detrás-de-las-tarifas-y-proporcionando-valiosas-perspectivas-sobre-la-economía-de-alquiler-en-la-ciudad." class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="investigar-en-profundidad-los-diversos-factores-que-impactan-en-el-precio-de-alquiler-de-habitaciones-destinadas-a-estudiantes-universitarios-en-lima-desentrañando-los-secretos-detrás-de-las-tarifas-y-proporcionando-valiosas-perspectivas-sobre-la-economía-de-alquiler-en-la-ciudad."><span class="header-section-number">2.3</span> 2. Investigar en profundidad los diversos factores que impactan en el precio de alquiler de habitaciones destinadas a estudiantes universitarios en Lima, desentrañando los secretos detrás de las tarifas y proporcionando valiosas perspectivas sobre la economía de alquiler en la ciudad.</h2>
+<p>Con el fin de alcanzar este segundo objetivo establecido, se llevará a cabo un análisis de las siguientes variables.</p>
+<section id="relación-del-precio-de-alquiler-y-el-distrito" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="relación-del-precio-de-alquiler-y-el-distrito"><span class="header-section-number">2.3.1</span> Relación del precio de alquiler y el distrito</h3>
+<p>-El precio de alquiler es una variable cuantitativa continua que varía significativamente de un distrito a otro. Comprender esta relación es esencial para las personas interesadas en alquilar una habitación, ya que les permite evaluar si un distrito específico se ajusta a su presupuesto y capacidad de pago.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>resultados_mediana <span class="ot">&lt;-</span> BD <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Distrito) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Promedio =</span> <span class="fu">mean</span>(Precio))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>resultados_iqr <span class="ot">&lt;-</span> BD <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Distrito) <span class="sc">%&gt;%</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">IQR =</span> <span class="fu">IQR</span>(Precio))</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>df_mediana <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Distrito =</span> resultados_mediana<span class="sc">$</span>Distrito, <span class="at">Mediana =</span> resultados_mediana<span class="sc">$</span>Promedio)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>df_iqr <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Distrito =</span> resultados_iqr<span class="sc">$</span>Distrito, <span class="at">IQR =</span> resultados_iqr<span class="sc">$</span>IQR)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>tabla_contingencia <span class="ot">&lt;-</span> <span class="fu">full_join</span>(df_iqr, df_mediana, <span class="at">by =</span> <span class="st">"Distrito"</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Se calcula el rango intercuartílico para saber que tan dispersos están los precios por distritos y con ese determinar que medida de tendencia central es la más adecuada para comparar estas dos variables</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(tabla_contingencia) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Distrito"</span>,<span class="st">"Rango Intercuartílico"</span>,<span class="st">"Mediana"</span>)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabla_contingencia, <span class="at">caption =</span> <span class="st">"Tabla 3: Medidas de resumen del precio de alquiler por distrito"</span>, <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Tabla 3: Medidas de resumen del precio de alquiler por distrito</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Distrito</th>
+<th style="text-align: right;">Rango Intercuartílico</th>
+<th style="text-align: right;">Mediana</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Ate</td>
+<td style="text-align: right;">300.00</td>
+<td style="text-align: right;">1050.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Barranco</td>
+<td style="text-align: right;">507.50</td>
+<td style="text-align: right;">1097.5000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Breña</td>
+<td style="text-align: right;">25.00</td>
+<td style="text-align: right;">483.3333</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Callao</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">400.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cercado de Lima</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">510.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chorrillos</td>
+<td style="text-align: right;">110.00</td>
+<td style="text-align: right;">616.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Comas</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">250.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jesús María</td>
+<td style="text-align: right;">125.00</td>
+<td style="text-align: right;">783.3333</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">La Molina</td>
+<td style="text-align: right;">87.50</td>
+<td style="text-align: right;">866.6667</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">La Victoria</td>
+<td style="text-align: right;">50.00</td>
+<td style="text-align: right;">550.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lima Metropolitana</td>
+<td style="text-align: right;">25.00</td>
+<td style="text-align: right;">575.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lince</td>
+<td style="text-align: right;">325.00</td>
+<td style="text-align: right;">852.8571</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Los Olivos</td>
+<td style="text-align: right;">65.00</td>
+<td style="text-align: right;">603.7500</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Miraflores</td>
+<td style="text-align: right;">290.00</td>
+<td style="text-align: right;">993.6842</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pueblo Libre</td>
+<td style="text-align: right;">630.75</td>
+<td style="text-align: right;">1208.8750</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">San Borja</td>
+<td style="text-align: right;">350.00</td>
+<td style="text-align: right;">925.7143</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">San Isidro</td>
+<td style="text-align: right;">162.50</td>
+<td style="text-align: right;">683.5000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">San Juan de Lurigancho</td>
+<td style="text-align: right;">160.00</td>
+<td style="text-align: right;">640.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">San Juan de Miraflores</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">410.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">San Martín de Porres</td>
+<td style="text-align: right;">175.00</td>
+<td style="text-align: right;">500.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">San Miguel</td>
+<td style="text-align: right;">300.00</td>
+<td style="text-align: right;">709.7368</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Santiago de Surco</td>
+<td style="text-align: right;">800.00</td>
+<td style="text-align: right;">944.3939</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Surquillo</td>
+<td style="text-align: right;">125.00</td>
+<td style="text-align: right;">900.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Villa Maria de Triunfo</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">650.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Villa el Salvador</td>
+<td style="text-align: right;">75.00</td>
+<td style="text-align: right;">375.0000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tabla_contingencia, <span class="fu">aes</span>(<span class="at">x =</span> Distrito, <span class="at">y =</span> Mediana)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"#00CDCD"</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">2</span>)),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">5</span>, <span class="dv">5</span>)) <span class="sc">+</span>  </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Gráfico N°3: Mediana de Precios de Alquiler por Distrito en Lima Metropolitana"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Mediana de Precio (soles)"</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Distritos de Lima"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="G07_Informe_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><em>Análisis</em>:</p>
+<ul>
+<li><p>De dicha tabla deducimos que Pueblo Libre tiene la mayor mediana, es decir, el mayor precio de alquiler de habitación, que asciende a 1208.8750 soles.</p></li>
+<li><p>Identificamos que el menor precio de alquiler de habitación es de 250 soles y le pertenece a Comas.</p></li>
+<li><p>En resumen, los precios de las habitaciones pueden estar influenciados por diversos factores, como el amoblamiento, el tamaño de la habitación o incluso la zona en donde se ubica la habitación. Por lo tanto, las habitaciones en el distrito de Pueblo Libre, relacionadas con el precio, deberían ofrecer una mayor comodidad al estudiante.</p></li>
+</ul>
+</section>
+<section id="relación-del-número-de-servicios-por-distrito" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="relación-del-número-de-servicios-por-distrito"><span class="header-section-number">2.3.2</span> Relación del número de servicios por distrito</h3>
+<ul>
+<li>La variable número de servicios es una variable cuantitativa discreta que indica la cantidad de servicios con los que contará la habitación en alquiler, como, agua, luz, Internet y seguridad.</li>
+<li>La variable distrito permitirá analizar la cantidad de servicios de las habitaciones en alquiler y evaluar en que zona les conviene alquilar a los universitarios de Lima teniendo en cuenta este aspecto.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>servicios<span class="ot">=</span>BD<span class="sc">$</span>Servicios</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>distrito<span class="ot">=</span>BD<span class="sc">$</span>Distrito</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>promedios_por_servicio <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(servicios<span class="sc">~</span> distrito, BD, mean)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>grafico_barras2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(promedios_por_servicio, <span class="fu">aes</span>(<span class="at">x =</span> distrito, <span class="at">y =</span> servicios)) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"#CD1076"</span>, <span class="at">width =</span> <span class="fl">0.8</span>) <span class="sc">+</span>  <span class="co"># Ajustar el ancho de las barras</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Gráfica N° 4 : Media de número de servicios por distrito"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Distritos"</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Promedio de número de servicios"</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>grafico_barras2 <span class="sc">+</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span>  <span class="co"># Rotar nombres en el eje x</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">str_wrap</span>(x, <span class="at">width =</span> <span class="dv">40</span>)) <span class="sc">+</span>  <span class="co"># Envolver nombres con str_wrap</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>))   <span class="co"># Ajustar el tamaño del texto en y</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="G07_Informe_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><em>Análisis</em>:</p>
+<ul>
+<li><p>El distrito con el mayor número de servicios en las habitaciones en alquiler es Callao, seguido por Cercado de Lima, ambos con 4 servicios.Por otro lado, los distritos con el menor número de servicios adicionales son Comas, que no cuenta con ningún servicio, y Villa María del Triunfo, con solo 1 servicio adicional.</p></li>
+<li><p>Es importante destacar que la mayoría de los distritos, a excepción de Comas y Villa María del Triunfo, tienen entre 1 y 3 servicios adicionales.</p></li>
+</ul>
+</section>
+<section id="relación-entre-el-tamaño-de-la-habitación-y-el-precio-de-alquiler" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="relación-entre-el-tamaño-de-la-habitación-y-el-precio-de-alquiler"><span class="header-section-number">2.3.3</span> Relación entre el tamaño de la habitación y el precio de alquiler</h3>
+<p>Agrupamos los distritos de Lima en 3 grupos socioeconónomicos según <a href="https://www.perutelegraph.com/news/peru-living-lifestyle/lima-s-most-expensive-and-most-affordable-districts-to-buy-property">Peru Telegraph</a>:</p>
+<p><strong>Alto grado socioeconómico</strong> : Barranco, Miraflores, San Isidro, San Borja, Santiago de Surco.</p>
+<p><strong>Grado socioeconómico medio</strong> : Lince, San Miguel, Jesús María, La Molina, Pueblo Libre.</p>
+<p><strong>Bajo grado socioeconómico</strong> : San Martín de Porres, Breña, San Juan de Miraflores, Surquillo, Ate, Chorrillos, La Victoria, Cercado de Lima, Villa Maria de Triunfo, San Juan de Lurigancho, Villa el Salvador, Los Olivos, Comas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>precio <span class="ot">&lt;-</span> BD<span class="sc">$</span>Precio <span class="co"># Cauntitativa continua</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>tamaño <span class="ot">&lt;-</span> BD<span class="sc">$</span>Tamaño <span class="co"># Cuantitativa continua</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>distrito <span class="ot">&lt;-</span> BD<span class="sc">$</span>Distrito </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Agrupamos los distritos en 3 grupos</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>distrito <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(BD<span class="sc">$</span>Distrito)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>distrito <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(distrito <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Barranco"</span>, <span class="st">"Miraflores"</span>, <span class="st">"San Isidro"</span>, <span class="st">"San Borja"</span>, <span class="st">"Santiago de Surco"</span>), <span class="st">"Socieconomico Alto"</span>, <span class="fu">ifelse</span>(distrito <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Lince"</span>, <span class="st">"San Miguel"</span>, <span class="st">"Jesús María"</span>, <span class="st">"La Molina"</span>, <span class="st">"Pueblo Libre"</span>), <span class="st">"Socieconomico Medio"</span>, <span class="st">"Socieconomico Bajo"</span>))</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(BD, <span class="fu">aes</span>(<span class="at">x =</span> tamaño, <span class="at">y =</span> precio, <span class="at">color =</span> distrito)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Socieconomico Alto"</span> <span class="ot">=</span> <span class="st">"deeppink3"</span>, <span class="st">"Socieconomico Medio"</span> <span class="ot">=</span> <span class="st">"#A2CD5A"</span>, <span class="st">"Socieconomico Bajo"</span> <span class="ot">=</span> <span class="st">"#79CDCD"</span>)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Tamaño (m2)"</span>, <span class="at">y =</span> <span class="st">"Precio (S/.)"</span>, <span class="at">color =</span> <span class="st">"Distrito"</span>,<span class="at">title =</span> <span class="st">"Grafico N°5: Relación entre tamaño y precio según su nivel socieconómico"</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="G07_Informe_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><em>Análisis</em>:</p>
+<ul>
+<li><p>Se aprecia que hay una <strong>correlación positiva</strong> entre el tamaño de la habitación y el precio de alquiler, es decir, a mayor tamaño de la habitación, mayor será el precio de alquiler. - El gráfico también muestra que los distritos de <strong>desarrollo alto</strong> tienen las viviendas <strong>más grandes</strong> y <strong>más caras</strong>, mientras que los distritos de <strong>desarrollo bajo</strong> tienen las <strong>viviendas más pequeñas</strong> y <strong>más baratas</strong>. Este tiene un <strong><em>comportamiento casi constante</em></strong> siendo la variación de precio muy pequeña. Los distritos de desarrollo medio se ubican en un rango intermedio entre los dos extremos.</p></li>
+<li><p>Esto se puede explicar por las diferencias en la oferta y la demanda de los cuartos según el nivel socio económico de los distritos. Según el <a href="https://cpi.pe/images/upload/paginaweb/archivo/23/poblacion%202022.pdf">INEI</a>, los distritos <a href="https://apeim.com.pe/wp-content/uploads/2022/08/2021-APEIM-NSE-Presentacion_Comite-Vfinal2.pdf">con mayor nivel socioeconómico son San Isidro, Miraflores, La Molina, Surco y San Borja, mientras que los distritos con menor nivel son Villa María del Triunfo, Villa El Salvador, San Juan de Lurigancho, Comas y Puente Piedra</a>. Estos distritos tienen distintas características en cuanto a infraestructura, servicios, seguridad y calidad de vida, lo que influye en el valor de las propiedades.</p></li>
+</ul>
+</section>
+</section>
+<section id="determinar-si-las-características-de-las-habitaciones-en-alquiler-en-lima-se-ajustan-a-las-necesidades-y-preferencias-de-los-estudiantes-universitarios-garantizando-una-experiencia-de-vida-académica-y-personal-satisfactoria." class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="determinar-si-las-características-de-las-habitaciones-en-alquiler-en-lima-se-ajustan-a-las-necesidades-y-preferencias-de-los-estudiantes-universitarios-garantizando-una-experiencia-de-vida-académica-y-personal-satisfactoria."><span class="header-section-number">2.4</span> Determinar si las características de las habitaciones en alquiler en Lima se ajustan a las necesidades y preferencias de los estudiantes universitarios, garantizando una experiencia de vida académica y personal satisfactoria.</h2>
+<p>Con el propósito de cumplir con nuestro último objetivo,analizaremos las siguientes variables:</p>
+<section id="relación-entre-número-de-transporte-público-cercanos-a-la-vivienda-por-distrito" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="relación-entre-número-de-transporte-público-cercanos-a-la-vivienda-por-distrito"><span class="header-section-number">2.4.1</span> Relación entre número de transporte público cercanos a la vivienda por distrito</h3>
+<p>La variable número de transporte público es una variable cuantitativa discreta, esta representa un aspecto importante a la hora de evaluar donde alquilar puesto que a mientras más opciones de transporte cercano haya, más fácil será desplazarse por la ciudad y acceder a lugares de trabajo, centros de estudios, centros de atención médica, áreas comerciales y áreas de recreación.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>grafico_lineas <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(BD, <span class="fu">aes</span>(<span class="at">x =</span> Distrito, <span class="at">y =</span> Transporte_int, <span class="at">group =</span> Distrito)) <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"Dominio"</span>), <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span>  </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="fu">aes</span>(<span class="at">shape =</span> <span class="st">"Promedio"</span>, <span class="at">color =</span> <span class="st">"Promedio"</span>), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Gráfica N° 6: Promedio de número de transporte por distrito"</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Distrito"</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Número de transporte"</span>) <span class="sc">+</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span>  <span class="co"># Inclinar nombres en el eje x</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Elemento2"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Dominio"</span> <span class="ot">=</span> <span class="st">"skyblue"</span>, <span class="st">"P"</span> <span class="ot">=</span> <span class="st">"red"</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Dominio"</span>, <span class="st">"Promedio"</span>)) <span class="sc">+</span>  <span class="co"># Agregar leyenda de color</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Elemento1"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Promedio"</span> <span class="ot">=</span> <span class="dv">23</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Promedio"</span>))  <span class="co"># Agregar leyenda de forma</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(grafico_lineas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="G07_Informe_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><em>Análisis</em>:</p>
+<ul>
+<li><p>Se observa que el Cercado de Lima presenta un mayor número de transportes cercanos a los dormitorios, mientras que Villa el Salvador cuenta con menos opciones.</p></li>
+<li><p>Distritos como Barranco,Chorrillos,La Molina,Miraflores San Miguel y Santiago de surco ofrecen una mayor variedad de números de transportes cercanos a los dormitorios.</p></li>
+<li><p>En general, la mayoría de los distritos ofrecen entre 3 y 4 opciones de transporte cerca de las habitaciones, lo cual beneficia a los estudiantes al facilitarles el traslado de un lugar a otro, como el traslado a su centro de estudios.</p></li>
+</ul>
+</section>
+<section id="relación-entre-la-descripción-y-la-calidad-de-la-habitación" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="relación-entre-la-descripción-y-la-calidad-de-la-habitación"><span class="header-section-number">2.4.2</span> Relación entre la descripción y la calidad de la habitación</h3>
+<p>La variable descripción nos indica que tan informativo fue la descripción de cada habitación en alquiler proporcionada por el dueño en los diversos sitios web consultadas en el presente estudio, esta variables fue evaluada en la escala del 1 - 5, en donde 1: Muy poco informativo, 2: Poco informativo, 3:Regularmente informativo 4: Bien informativo y 5: Muy bien informativo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>BD<span class="sc">$</span>Descripcion <span class="ot">&lt;-</span> <span class="fu">factor</span>(BD<span class="sc">$</span>Descripcion, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Muy poco informativo"</span>, <span class="st">"Poco informativo"</span>, <span class="st">"Regularmente informativo"</span>,<span class="st">"Bien informativo"</span>, <span class="st">"Muy bien informativo"</span>))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>Descripcion<span class="ot">&lt;-</span>BD<span class="sc">$</span>Descripcion</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>Calidad <span class="ot">&lt;-</span> BD<span class="sc">$</span>Calidad_habitacion</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>grafico_barras_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(BD, <span class="fu">aes</span>(<span class="at">x =</span> Descripcion, <span class="at">fill =</span> Calidad)) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>, <span class="at">width =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Gráfica N°7 : Distribución de calidad por descripción de habitación"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Descripción"</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Calidad"</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Calidad"</span>) <span class="sc">+</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(grafico_barras_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="G07_Informe_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><em>Análisis</em>:</p>
+<ul>
+<li>En la siguiente gráfica se observa que las habitaciones con un mejor estado de calidad(muy bien cuidado) presentan una descripción de manera detallada e informativa.Sin embargo,las habitaciones algo descuidadas presenta muy poca información en sus descripciones.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="conclusiones" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Conclusiones</h1>
+<p>Es preciso resaltar que nuestras conclusiones están en base a nuestros objetivos:</p>
+<ul>
+<li><p>En primer lugar,podemos decir que los distritos de Lima Oeste son los que presentan una mayor oferta de habitaciones en alquiler para estudiantes universitarios, siendo el distrito de Pueblo Libre el que presenta la mayor calidad de habitaciones en alquiler, sin embargo, el distrito de Comas presenta la menor calidad de habitaciones en alquiler.</p></li>
+<li><p>Por otro lado, el distrito de Pueblo Libre es el que presenta la mayor mediana de precios de alquiler, mientras que el distrito de Comas presenta la menor mediana de precios de alquiler.En cuanto al tamaño de las habitaciones en alquiler, los distritos de nivel socio-económico alto tienden a ser más caras en relación a su tamaño y precio de alquiler que los distritos de nivel socio-económico bajo.</p></li>
+<li><p>Por último,en cuanto al número de transportes cercanos a las habitaciones en alquiler, el Cercado de Lima destaca por tener el mayor número de transportes cercanos a los dormitorios, mientras que Villa el Salvador cuenta con menos opciones,en cuanto a la descripción de las habitaciones en alquiler, se observa que las habitaciones cuyas descripciones coinciden o guardan similitud con las proporcionadas por el anunciante exhiben un nivel de calidad positivo, superando el 50%. En contraste, aquellas habitaciones cuyas descripciones difieren significativamente suelen presentar condiciones de mantenimiento deficientes.</p></li>
+</ul>
+</section>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
